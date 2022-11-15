@@ -1,10 +1,10 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import StatSelector from "./StatSelector";
 import StatContainer from "./StatContainer";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
-    const nums = [1,2,3,4,5,6]
+    const nums = [8,10,12,13,14,15]
 
     const [STR, setSTR] = useState('')
     const [DEX, setDEX] = useState('')
@@ -16,6 +16,15 @@ function App() {
     const statStates = [STR, DEX, CON, INT, WIS, CHA]
 
     const selects = document.getElementsByClassName('statSelect');
+
+    const [STRmod, setSTRmod] = useState(0)
+    const [DEXmod, setDEXmod] = useState(0)
+    const [CONmod, setCONmod] = useState(0)
+    const [INTmod, setINTmod] = useState(0)
+    const [WISmod, setWISmod] = useState(0)
+    const [CHAmod, setCHAmod] = useState(0)
+
+    const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
 
     // const selectsRef = useRef(null);
     // const selects2 = selectsRef.current;
@@ -63,31 +72,38 @@ function App() {
                 }}}
     }
 
-
     const changeStat = (statName, statValue) => {
+        const modValue = Math.floor((statValue-10)/2);
         switch (statName) {
             case "STR":
                 setSTR(statValue)
+                setSTRmod(modValue)
                 break
             case "DEX":
                 setDEX(statValue)
+                setDEXmod(modValue)
                 break
             case "CON":
                 setCON(statValue)
+                setCONmod(modValue)
                 break
             case "INT":
                 setINT(statValue)
+                setINTmod(modValue)
                 break
             case "WIS":
                 setWIS(statValue)
+                setWISmod(modValue)
                 break
             case "CHA":
                 setCHA(statValue)
+                setCHAmod(modValue)
                 break
             default:
                 throw new Error("Error with switch case, ran into default")
         }
     }
+
 
     // render
     return (
@@ -97,13 +113,15 @@ function App() {
                 nums={nums}
                 handleOptionChange={handleStatChange}
             />
+
             <StatContainer
                 stats={stats}
                 statStates={statStates}
             />
-            <div>
-            {statStates.map(state => {
-                return <div className="container">{state/2}</div>
+
+            <div className="modifierContainer">
+            {stats.map(stat => {
+                return <div id={stat + "mod"}>{modStates[stats.indexOf(stat)]}</div>
             })}
             </div>
         </div>
