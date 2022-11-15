@@ -1,4 +1,5 @@
 import {useState} from "react";
+import StatSelector from "./StatSelector";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
@@ -90,18 +91,11 @@ function App() {
     // render
     return (
         <div className="App">
-            <div id="selectContainer" className="container">
-                {stats.map(stat => {
-                    return <div className={stat + "container"}>
-                        <select id={stat + "select"} name={stat} className="statSelect" onChange={handleStatChange}>
-                            <option value="-">--{stat}--</option>
-                            {nums.map(num => {
-                                return <option value={num}>{num}</option>
-                            })}
-                        </select>
-                    </div>
-                })}
-            </div>
+            <StatSelector
+                stats={stats}
+                nums={nums}
+                handleOptionChange={handleStatChange}
+            />
 
             <div id="statContainer" className="container">
                 {statStates.map(state => {
