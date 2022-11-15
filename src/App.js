@@ -1,16 +1,17 @@
 import {useState} from "react";
 import StatSelector from "./StatSelector";
+import StatContainer from "./StatContainer";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
     const nums = [1,2,3,4,5,6]
 
-    const [STR, setSTR] = useState('STR')
-    const [DEX, setDEX] = useState('DEX')
-    const [CON, setCON] = useState('CON')
-    const [INT, setINT] = useState('INT')
-    const [WIS, setWIS] = useState('WIS')
-    const [CHA, setCHA] = useState('CHA')
+    const [STR, setSTR] = useState('')
+    const [DEX, setDEX] = useState('')
+    const [CON, setCON] = useState('')
+    const [INT, setINT] = useState('')
+    const [WIS, setWIS] = useState('')
+    const [CHA, setCHA] = useState('')
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA]
 
@@ -96,13 +97,14 @@ function App() {
                 nums={nums}
                 handleOptionChange={handleStatChange}
             />
-
-            <div id="statContainer" className="container">
-                {statStates.map(state => {
-                    return <div id={stats[statStates.indexOf(state)]}>
-                        {state}
-                    </div>
-                })}
+            <StatContainer
+                stats={stats}
+                statStates={statStates}
+            />
+            <div>
+            {statStates.map(state => {
+                return <div className="container">{state/2}</div>
+            })}
             </div>
         </div>
     );
