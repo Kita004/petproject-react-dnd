@@ -27,6 +27,10 @@ function App() {
 
     const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
 
+    const classes = ["artificer", "bard", "barbarian", "cleric"]
+    const races = ["human", "dwarf", "elf"]
+    const backgrounds = ["spy", "entertainer", "charlatan"]
+
     // const selectsRef = useRef(null);
     // const selects2 = selectsRef.current;
 
@@ -126,7 +130,11 @@ function App() {
             })}
             </div>
 
-            <BasicInfoSelector />
+            <BasicInfoSelector
+                classes={classes}
+                races={races}
+                backgrounds={backgrounds}
+            />
         </div>
     );
 }

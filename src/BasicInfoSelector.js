@@ -1,9 +1,6 @@
 import React from "react";
 
-const BasicInfoSelector = () => {
-    const classes = ["artificer", "bard", "barbarian", "cleric"]
-    const races = ["human", "dwarf", "elf"]
-    const backgrounds = ["spy", "entertainer", "charlatan"]
+const BasicInfoSelector = ({classes, races, backgrounds}) => {
     const MAX_LEVEL = 20;
 
     return <div className="container" id="BasicInfoSelector">
