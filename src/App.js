@@ -1,17 +1,18 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import StatSelector from "./StatSelector";
 import StatContainer from "./StatContainer";
+import BasicInfoSelector from "./BasicInfoSelector";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
     const nums = [8,10,12,13,14,15]
 
-    const [STR, setSTR] = useState('')
-    const [DEX, setDEX] = useState('')
-    const [CON, setCON] = useState('')
-    const [INT, setINT] = useState('')
-    const [WIS, setWIS] = useState('')
-    const [CHA, setCHA] = useState('')
+    const [STR, setSTR] = useState('');
+    const [DEX, setDEX] = useState('');
+    const [CON, setCON] = useState('');
+    const [INT, setINT] = useState('');
+    const [WIS, setWIS] = useState('');
+    const [CHA, setCHA] = useState('');
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA]
 
@@ -124,6 +125,8 @@ function App() {
                 return <div id={stat + "mod"}>{modStates[stats.indexOf(stat)]}</div>
             })}
             </div>
+
+            <BasicInfoSelector />
         </div>
     );
 }
