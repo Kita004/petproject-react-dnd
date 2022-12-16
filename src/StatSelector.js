@@ -3,7 +3,7 @@ import React from "react";
 const StatSelector = ({stats, nums, handleOptionChange}) => {
     return <div id="statSelector" className="container">
             {stats.map(stat => {
-                return <div className={stat + "container"}>
+                return <div className={stat + "selector"}>
                     <select id={stat + "select"} name={stat} className="statSelect" onChange={handleOptionChange}>
                         <option value="-">--{stat}--</option>
                         {nums.map(num => {
