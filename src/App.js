@@ -16,6 +16,7 @@ function App() {
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA]
 
+
     const selects = document.getElementsByClassName('statSelect');
 
     const [STRmod, setSTRmod] = useState(0)
@@ -27,9 +28,19 @@ function App() {
 
     const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
 
+
     const classes = ["artificer", "bard", "barbarian", "cleric"]
     const races = ["human", "dwarf", "elf"]
     const backgrounds = ["spy", "entertainer", "charlatan"]
+
+    const [charName, setCharName] = useState('Code The Cool')
+    const [charLevel, setCharLevel] = useState(1)
+    const [charClass, setCharClass] = useState('wizard')
+    const [charRace, setCharRace] = useState('human')
+    const [charBackground, setCharBackground] = useState('sage')
+
+    const basicInfos = ["Name"]
+    const basicInfoStates = [charName, charLevel, charClass, charRace, charBackground]
 
     // const selectsRef = useRef(null);
     // const selects2 = selectsRef.current;

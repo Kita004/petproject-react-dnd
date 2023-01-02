@@ -6,7 +6,7 @@ const BasicInfoSelector = ({classes, races, backgrounds}) => {
     return <div className="container" id="BasicInfoSelector">
         <div>
             <label htmlFor="charName">Name: </label>
-            <input type="text" id="charName"/>
+            {/*<input type="text" id="charName"/>*/}
         </div>
         <div>
             <label htmlFor="charLevel">Level: </label>
