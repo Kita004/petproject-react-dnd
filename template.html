@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Sheet</title>
+</head>
+<body>
+    <div className="App">
+        <div className="container" id="BasicInfoContainer">
+            <h2>Basic Info</h2>
+            <table className="characterTable" id="basicInfoTable">
+                <tr>
+                    <td>Name:</td>
+                    <td>Code The Cool</td>
+                    <td>Race:</td>
+                    <td>Human</td>
+                </tr>
+                <tr>
+                    <td>Class:</td>
+                    <td>Wizard</td>
+                    <td>Sub-class:</td>
+                    <td>School of Illusion</td>
+                </tr>
+                <tr>
+                    <td>Level:</td>
+                    <td>20</td>
+                    <td>Proficiency:</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Background:</td>
+                    <td>Scholar</td>
+                    <td>Alignment:</td>
+                    <td>Chaotic Evil</td>
+                </tr>
+                <tr>
+                    <td>Hit Dice:</td>
+                    <td>20/6</td>
+                    <td>Max HP:</td>
+                    <td>9999</td>
+                </tr>
+                <tr>
+                    <td>Initiative:</td>
+                    <td>5</td>
+                    <td>Armor Class:</td>
+                    <td>42</td>
+                </tr>
+            </table>
+        </div>
+        <div className="container" id="AttributesContainer">
+            <h2>Attributes</h2>
+            <div style="display: flex">
+            <table className="characterTable" id="statTable">
+                <tr>
+                    <td>Strength:</td>
+                    <td><input type="number" min="1" max="20"></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>Dexterity:</td>
+                    <td><input type="number" min="1" max="20"></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>Constitution:</td>
+                    <td><input type="number" min="1" max="20"></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>Intelligence:</td>
+                    <td><input type="number" min="1" max="20"></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>Wisdom:</td>
+                    <td><input type="number" min="1" max="20"></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>Charisma:</td>
+                    <td><input type="number" min="1" max="20"></td>
+                    <td>+5</td>
+                </tr>
+            </table>
+            <table className="characterTable" id="savingThrowTable">
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Save:</td>
+                    <td>+5</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
