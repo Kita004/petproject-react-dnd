@@ -5,92 +5,314 @@
     <title>Character Sheet</title>
 </head>
 <body>
-    <div className="App">
-        <div className="container" id="BasicInfoContainer">
-            <h2>Basic Info</h2>
-            <table className="characterTable" id="basicInfoTable">
-                <tr>
-                    <td>Name:</td>
-                    <td>Code The Cool</td>
-                    <td>Race:</td>
-                    <td>Human</td>
-                </tr>
-                <tr>
-                    <td>Class:</td>
-                    <td>Wizard</td>
-                    <td>Sub-class:</td>
-                    <td>School of Illusion</td>
-                </tr>
-                <tr>
-                    <td>Level:</td>
-                    <td>20</td>
-                    <td>Proficiency:</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Background:</td>
-                    <td>Scholar</td>
-                    <td>Alignment:</td>
-                    <td>Chaotic Evil</td>
-                </tr>
-                <tr>
-                    <td>Hit Dice:</td>
-                    <td>20/6</td>
-                    <td>Max HP:</td>
-                    <td>9999</td>
-                </tr>
-                <tr>
-                    <td>Initiative:</td>
-                    <td>5</td>
-                    <td>Armor Class:</td>
-                    <td>42</td>
-                </tr>
-            </table>
+<div className="App">
+    <header style="display: flex; justify-content: space-between">
+        <button>Home?</button>
+        <div className="CRUD">
+            <button>New</button>
+            <button>Load</button>
+            <button>Save/Edit</button>
+            <button>Delete</button>
         </div>
-        <div className="container" id="AttributesContainer">
-            <h2>Attributes</h2>
-            <div style="display: flex">
-            <table className="characterTable" id="statTable">
-                <tr>
-                    <td>Strength:</td>
-                    <td><input type="number" min="1" max="20"></td>
-                    <td>+5</td>
-                </tr>
-                <tr>
-                    <td>Dexterity:</td>
-                    <td><input type="number" min="1" max="20"></td>
-                    <td>+5</td>
-                </tr>
-                <tr>
-                    <td>Constitution:</td>
-                    <td><input type="number" min="1" max="20"></td>
-                    <td>+5</td>
-                </tr>
-                <tr>
-                    <td>Intelligence:</td>
-                    <td><input type="number" min="1" max="20"></td>
-                    <td>+5</td>
-                </tr>
-                <tr>
-                    <td>Wisdom:</td>
-                    <td><input type="number" min="1" max="20"></td>
-                    <td>+5</td>
-                </tr>
-                <tr>
-                    <td>Charisma:</td>
-                    <td><input type="number" min="1" max="20"></td>
-                    <td>+5</td>
-                </tr>
-            </table>
-            <table className="characterTable" id="savingThrowTable">
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>Save:</td>
-                    <td>+5</td>
-                </tr>
-            </table>
+        <button>Login/Logout</button>
+    </header>
+    <div style="display: flex">
+        <div>
+            <div className="container" id="BasicInfoContainer">
+                <h2>Basic Info</h2>
+                <table className="characterTable" id="basicInfoTable">
+                    <tr>
+                        <td>Name:</td>
+                        <td>
+                            <input type="text" id="charName" placeholder="Code The Cool">
+                        </td>
+                        <td>Race:</td>
+                        <td>
+                            <select id="charRace">
+                                <option value="-">--RACE--</option>
+                                <option value="Human" selected>Human</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Class:</td>
+                        <td>
+                            <select id="charClass">
+                                <option value="-">--CLASS--</option>
+                                <option value="Wizard" selected>Wizard</option>
+                            </select>
+                        </td>
+                        <td>Sub-class:</td>
+                        <td>
+                            <select id="charSubClass">
+                                <option value="-">--SUB-CLASS--</option>
+                                <option value="Illusion" selected>School of Illusion</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Level:</td>
+                        <td><input type="number" min="1" max="20" placeholder="20"></td>
+                        <td>Proficiency:</td>
+                        <td>+5</td>
+                    </tr>
+                    <tr>
+                        <td>Background:</td>
+                        <td>
+                            <select id="charBackground">
+                                <option value="-">--BACKGROUND--</option>
+                                <option value="Scholar" selected>Scholar</option>
+                            </select>
+                        </td>
+                        <td>Alignment:</td>
+                        <td>
+                            <select id="charAlignment">
+                                <option value="-">--ALIGNMENT--</option>
+                                <option value="CE" selected>Chaotic Evil</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>Hit Dice:</td>
+                        <td>20/6</td>
+                        <td>Max HP:</td>
+                        <td>9999</td>
+                    </tr>
+                    <tr>
+                        <td>Initiative:</td>
+                        <td>+5</td>
+                        <td>Armor Class:</td>
+                        <td>42</td>
+                    </tr>
+                </table>
+            </div>
+            <div className="container" id="AttributesContainer">
+                <h2>Attributes</h2>
+                <div style="display: flex" className="flexBox">
+                    <table className="characterTable" id="statTable">
+                        <tr>
+                            <td>Strength:</td>
+                            <td><input type="number" min="1" max="20"></td>
+                            <td>+5</td>
+                        </tr>
+                        <tr>
+                            <td>Dexterity:</td>
+                            <td><input type="number" min="1" max="20"></td>
+                            <td>+5</td>
+                        </tr>
+                        <tr>
+                            <td>Constitution:</td>
+                            <td><input type="number" min="1" max="20"></td>
+                            <td>+5</td>
+                        </tr>
+                        <tr>
+                            <td>Intelligence:</td>
+                            <td><input type="number" min="1" max="20"></td>
+                            <td>+5</td>
+                        </tr>
+                        <tr>
+                            <td>Wisdom:</td>
+                            <td><input type="number" min="1" max="20"></td>
+                            <td>+5</td>
+                        </tr>
+                        <tr>
+                            <td>Charisma:</td>
+                            <td><input type="number" min="1" max="20"></td>
+                            <td>+5</td>
+                        </tr>
+                    </table>
+                    <table className="characterTable" id="savingThrowTable">
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Save:</td>
+                            <td id="savingSTR">+5</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Save:</td>
+                            <td id="savingDEX">+5</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Save:</td>
+                            <td id="savingCON">+5</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" checked></td>
+                            <td>Save:</td>
+                            <td id="savingINT">+5<small>+5</small></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" checked></td>
+                            <td>Save:</td>
+                            <td id="savingWIS">+5<small>+5</small></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>Save:</td>
+                            <td id="savingCHA">+5</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div className="container" id="diceContainer">
+                <button>d6</button>
+                <button>d8</button>
+                <button>d10</button>
+                <button>d12</button>
+                <button>d20</button>
+                <button>clear</button>
             </div>
         </div>
+        <div className="container" id="skillsContainer">
+            <h2>Skills</h2>
+            <table className="characterTable" id="skillsTable">
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Acrobatics <i>| Dex</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Animal Handling <i>| Wis</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Arcana <i>| Int</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Athletics <i>| Str</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Deception <i>| Cha</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>History <i>| Int</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Insight <i>| Wis</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Intimidation <i>| Cha</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Investigation <i>| Int</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Medicine <i>| Wis</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Nature <i>| Int</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Perception <i>| Wis</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Performance <i>| Cha</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Persuasion <i>| Cha</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Religion <i>| Int</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Sleight of Hand <i>| Dex</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Stealth <i>| Dex</i></td>
+                    <td>+5</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </td>
+                    <td>Survival <i>| Wis</i></td>
+                    <td>+5</td>
+                </tr>
+            </table>
+        </div>
     </div>
+</div>
 </body>
 </html>
