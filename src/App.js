@@ -28,11 +28,6 @@ function App() {
 
     const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
 
-
-    const classes = ["artificer", "bard", "barbarian", "cleric"]
-    const races = ["human", "dwarf", "elf"]
-    const backgrounds = ["spy", "entertainer", "charlatan"]
-
     const [charName, setCharName] = useState('Code The Cool')
     const [charLevel, setCharLevel] = useState(1)
     const [charClass, setCharClass] = useState('wizard')
@@ -141,11 +136,7 @@ function App() {
             })}
             </div>
 
-            <BasicInfoSelector
-                classes={classes}
-                races={races}
-                backgrounds={backgrounds}
-            />
+            <BasicInfoSelector/>
         </div>
     );
 }
