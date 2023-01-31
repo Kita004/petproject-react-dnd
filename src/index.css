@@ -7,12 +7,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .App {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  display: flex;
+}
+
+Header {
+  display: flex;
+  justify-content: space-between;
 }
