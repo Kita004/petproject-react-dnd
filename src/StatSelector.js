@@ -3,9 +3,9 @@ import React from "react";
 const StatSelector = ({stats, nums, handleOptionChange}) => {
     return <div id="statSelector" className="container">
         <table id="statSelectorTable" className="characterTable">
+            <tbody>
             {stats.map(stat => {
-                return <tbody>
-                <tr>
+                return <tr>
                     <td>
                         {stat}
                     </td>
@@ -19,8 +19,9 @@ const StatSelector = ({stats, nums, handleOptionChange}) => {
                     </td>
                     <td>**insert calculation**</td>
                 </tr>
-                </tbody>
+
             })}
+            </tbody>
         </table>
     </div>
 }
