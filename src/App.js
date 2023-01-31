@@ -57,7 +57,7 @@ function App() {
         const statId = e.target.id;
         const statName = e.target.name;
         const statValue = e.target.value;
-        const valueToRepair = document.getElementById(statName).textContent;
+        const valueToRepair = document.getElementById(statId).textContent;
 
         removeOption(statId, statValue);
         repairOption(valueToRepair);
