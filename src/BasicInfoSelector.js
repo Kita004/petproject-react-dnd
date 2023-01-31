@@ -9,6 +9,7 @@ const BasicInfoSelector = () => {
     return <div className="container" id="BasicInfoSelector">
         <h2>Basic Info</h2>
         <table className="characterTable" id="basicInfoTable">
+            <tbody>
             <tr>
                 <td>Name:</td>
                 <td>
@@ -74,6 +75,7 @@ const BasicInfoSelector = () => {
                 <td>Armor Class:</td>
                 <td>42</td>
             </tr>
+            </tbody>
         </table>
     </div>
 }
