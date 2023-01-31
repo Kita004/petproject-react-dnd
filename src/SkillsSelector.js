@@ -1,7 +1,8 @@
 import React from "react";
 
 const SkillsSelector = ({stats, skills}) => {
-    return <div id="skillSelector" className="container">
+    return <div id="skillSelector">
+        <h2>Skills</h2>
         <table className="characterTable" id="skillsTable">
             <tbody>
             {Object.entries(skills)

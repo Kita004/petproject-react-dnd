@@ -6,7 +6,8 @@ const BasicInfoSelector = () => {
     const RACES = ["human", "dwarf", "elf"]
     const BACKGROUNDS = ["spy", "entertainer", "charlatan"]
 
-    return <div className="container" id="BasicInfoSelector">
+    return <div id="BasicInfoSelector">
+        <h2>Basic Info</h2>
         <table className="characterTable" id="basicInfoTable">
             <tbody>
             <tr>

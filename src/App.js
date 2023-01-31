@@ -2,10 +2,32 @@ import {useState} from "react";
 import StatSelector from "./StatSelector";
 import StatContainer from "./StatContainer";
 import BasicInfoSelector from "./BasicInfoSelector";
+import SavingThrowSelector from "./SavingThrowSelector";
+import Header from "./Header";
+import SkillsSelector from "./SkillsSelector";
+import DiceRoller from "./DiceRoller";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
     const nums = [8,10,12,13,14,15]
+    const skills = {
+        "acrobatics": "dex",
+        "animal handling": "wis",
+        "arcana": "int",
+        "athletics": "str",
+        "deception": "cha",
+        "history": "int",
+        "insight": "intimidation",
+        "investigation": "int",
+        "medicine": "wis",
+        "nature": "int",
+        "perception": "wis",
+        "persuasion": "cha",
+        "religion": "int",
+        "sleight of hand": "dex",
+        "stealth": "dex",
+        "survival": "wis"
+    }
 
     const [STR, setSTR] = useState('');
     const [DEX, setDEX] = useState('');
@@ -15,7 +37,6 @@ function App() {
     const [CHA, setCHA] = useState('');
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA]
-
 
     const selects = document.getElementsByClassName('statSelect');
 
@@ -119,24 +140,26 @@ function App() {
     // render
     return (
         <div className="App">
-            <StatSelector
-                stats={stats}
-                nums={nums}
-                handleOptionChange={handleStatChange}
-            />
-
-            <StatContainer
-                stats={stats}
-                statStates={statStates}
-            />
-
-            <div className="modifierContainer">
-            {stats.map(stat => {
-                return <div id={stat + "mod"}>{modStates[stats.indexOf(stat)]}</div>
-            })}
+            <Header />
+            <div className="container">
+                <div>
+                    <BasicInfoSelector />
+                    <div id="attributesContainer" className="container">
+                        <StatSelector
+                            stats={stats}
+                            nums={nums}
+                            handleOptionChange={handleStatChange}
+                        />
+                        <SavingThrowSelector
+                            stats={stats}
+                        />
+                    </div>
+                </div>
+                <SkillsSelector
+                    skills={skills}
+                />
             </div>
-
-            <BasicInfoSelector/>
+            <DiceRoller />
         </div>
     );
 }
