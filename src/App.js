@@ -145,10 +145,9 @@ function App() {
                 <div>
                     <BasicInfoSelector />
                     <div id="attributesContainer" className="container">
-                        <StatSelector
+                        <StatContainer
                             stats={stats}
-                            nums={nums}
-                            handleOptionChange={handleStatChange}
+                            statStates={statStates}
                         />
                         <SavingThrowSelector
                             stats={stats}
