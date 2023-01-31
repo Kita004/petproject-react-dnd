@@ -7,13 +7,12 @@ const BasicInfoSelector = () => {
     const BACKGROUNDS = ["spy", "entertainer", "charlatan"]
 
     return <div className="container" id="BasicInfoSelector">
-        <h2>Basic Info</h2>
         <table className="characterTable" id="basicInfoTable">
             <tbody>
             <tr>
                 <td>Name:</td>
                 <td>
-                    <input type="text" id="charName" placeholder="Code The Cool"/>
+                    <input type="text" id="charName" defaultValue="Code The Cool"/>
                 </td>
                 <td>Race:</td>
                 <td>
@@ -44,7 +43,7 @@ const BasicInfoSelector = () => {
             </tr>
             <tr>
                 <td>Level:</td>
-                <td><input type="number" min="1" max={MAX_LEVEL} placeholder="20"/></td>
+                <td><input type="number" min="1" max={MAX_LEVEL} defaultValue="20"/></td>
                 <td>Proficiency:</td>
                 <td>+5</td>
             </tr>
