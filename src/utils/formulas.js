@@ -11,7 +11,11 @@ export function calculateWithProficiency(stat, modifier) {
 }
 
 export function calculateStatMod(stat) {
-    return Math.floor((stat - 10) / 2);
+    if (stat) {
+        return Math.floor((stat - 10) / 2);
+    } else {
+        return null
+    }
 }
 
 export function roll(die) {
