@@ -6,7 +6,7 @@ const StatContainer = ({statStates, stats}) => {
         <table id="statContainerTable" className="characterTable">
             <tbody>
             {stats.map( stat => {
-                    return <tr>
+                    return <tr key={stat + "Row"}>
                         <td>{stat}</td>
                         <td>
                             <input id={stat + "container"} type="number" min="1" max="20" placeholder={statStates[stats.indexOf(stat)].toString()}/>

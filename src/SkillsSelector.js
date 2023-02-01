@@ -7,7 +7,7 @@ const SkillsSelector = ({stats, skills}) => {
             <tbody>
             {Object.entries(skills)
                 .map(([key, value]) => {
-                return <tr>
+                return <tr key={key + "Row"}>
                     <td><input id={key + "Checkbox1"} type="checkbox"/></td>
                     <td><input id={key + "Checkbox2"} type="checkbox"/></td>
                     <td>{key.charAt(0).toUpperCase() + key.slice(1)} |<i>{value}</i></td>

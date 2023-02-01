@@ -6,7 +6,7 @@ const SavingThrowSelector = ({stats}) => {
         <table id="savingThrowTable" className="characterTable">
             <tbody>
             {stats.map(stat => {
-                return <tr>
+                return <tr key={stat + "Row"}>
                     <td><input id={stat + "savingCheckbox"} type="checkbox"/></td>
                     <td>Save:</td>
                     <td id={stat + "saving"}>**Insert Calculation**</td>
