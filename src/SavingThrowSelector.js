@@ -2,7 +2,7 @@ import React from "react";
 
 const SavingThrowSelector = ({stats}) => {
     return <div id="savingThrowSelector">
-        <h2>Saving Throws</h2>
+        {/*<h2>Saving Throws</h2>*/}
         <table id="savingThrowTable" className="characterTable">
             <tbody>
             {stats.map(stat => {
