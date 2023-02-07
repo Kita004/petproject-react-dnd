@@ -4,7 +4,8 @@
     "name": "Code The Cool",
     "level": 20,
     "class": "wizard",
-    "subClass": "school of Illusion",
+    "subClass": "school of illusion",
+    "race": "human",
     "background": "scholar",
     "alignment": "CE",
     "stats": {
