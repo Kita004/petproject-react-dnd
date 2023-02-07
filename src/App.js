@@ -145,11 +145,21 @@ function App() {
             <Header />
             <div className="container">
                 <div>
-                    <BasicInfoSelector />
-                    <div id="attributesContainer" className="container">
+                    <BasicInfoSelector
+                        charName={charName}
+                        charClass={charClass}
+                        charSubClass={charSubClass}
+                        charRace={charRace}
+                        charLevel={charLevel}
+                        charBackground={charBackground}
+                        charAlignment={charAlignment}
+                    />
+                    <h2>Attributes</h2>
+                    <div id="attributesContainer" className="container attributes">
                         <StatContainer
                             stats={stats}
                             statStates={statStates}
+                            changeStat={changeStat}
                         />
                         <SavingThrowSelector
                             stats={stats}
