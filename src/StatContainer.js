@@ -1,17 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
+import * as formulas from "./utils/formulas"
 
-const StatContainer = ({statStates, stats}) => {
+const StatContainer = ({statStates, stats, changeStat}) => {
+
     return <div id="statContainer">
-        <h2>Stats</h2>
         <table id="statContainerTable" className="characterTable">
             <tbody>
             {stats.map( stat => {
                     return <tr key={stat + "Row"}>
                         <td>{stat}</td>
                         <td>
-                            <input id={stat + "container"} type="number" min="1" max="20" placeholder={statStates[stats.indexOf(stat)].toString()}/>
+                            <input onChange={e => changeStat(stat, e.target.value)} id={stat + "container"} type="number" min="1" max="20" defaultValue={statStates[stats.indexOf(stat)]}/>
                         </td>
-                        <td>**Insert Calculation**</td>
+                        <td>{formulas.calculateStatMod(statStates[stats.indexOf(stat)])}</td>
                     </tr>
                 }
             )}
