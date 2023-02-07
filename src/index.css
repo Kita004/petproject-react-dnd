@@ -24,7 +24,7 @@ Header {
   justify-content: space-between;
 }
 
-.basicInfoSelect:disabled {
+select:disabled, input:disabled {
   background: transparent;
   border: none;
   appearance: none;
