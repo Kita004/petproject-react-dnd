@@ -107,31 +107,31 @@ function App() {
     }
 
     const changeStat = (statName, statValue) => {
-        const modValue = Math.floor((statValue-10)/2);
+        // const modValue = Math.floor((statValue-10)/2);
         switch (statName) {
             case "STR":
                 setSTR(statValue)
-                setSTRmod(modValue)
+                // setSTRmod(modValue)
                 break
             case "DEX":
                 setDEX(statValue)
-                setDEXmod(modValue)
+                // setDEXmod(modValue)
                 break
             case "CON":
                 setCON(statValue)
-                setCONmod(modValue)
+                // setCONmod(modValue)
                 break
             case "INT":
                 setINT(statValue)
-                setINTmod(modValue)
+                // setINTmod(modValue)
                 break
             case "WIS":
                 setWIS(statValue)
-                setWISmod(modValue)
+                // setWISmod(modValue)
                 break
             case "CHA":
                 setCHA(statValue)
-                setCHAmod(modValue)
+                // setCHAmod(modValue)
                 break
             default:
                 throw new Error("Error with switch case, ran into default")
