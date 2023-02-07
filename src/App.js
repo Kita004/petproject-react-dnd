@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import StatSelector from "./StatSelector";
 import StatContainer from "./StatContainer";
 import BasicInfoSelector from "./BasicInfoSelector";
@@ -6,6 +6,7 @@ import SavingThrowSelector from "./SavingThrowSelector";
 import Header from "./Header";
 import SkillsSelector from "./SkillsSelector";
 import DiceRoller from "./DiceRoller";
+import api from "./utils/api";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
@@ -29,33 +30,34 @@ function App() {
         "survival": "wis"
     }
 
-    const [STR, setSTR] = useState('');
-    const [DEX, setDEX] = useState('');
-    const [CON, setCON] = useState('');
-    const [INT, setINT] = useState('');
-    const [WIS, setWIS] = useState('');
-    const [CHA, setCHA] = useState('');
+    const [STR, setSTR] = useState(8);
+    const [DEX, setDEX] = useState(10);
+    const [CON, setCON] = useState(12);
+    const [INT, setINT] = useState(13);
+    const [WIS, setWIS] = useState(14);
+    const [CHA, setCHA] = useState(15);
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA]
 
     const selects = document.getElementsByClassName('statSelect');
 
-    const [STRmod, setSTRmod] = useState(0)
-    const [DEXmod, setDEXmod] = useState(0)
-    const [CONmod, setCONmod] = useState(0)
-    const [INTmod, setINTmod] = useState(0)
-    const [WISmod, setWISmod] = useState(0)
-    const [CHAmod, setCHAmod] = useState(0)
+    // const [STRmod, setSTRmod] = useState(0)
+    // const [DEXmod, setDEXmod] = useState(0)
+    // const [CONmod, setCONmod] = useState(0)
+    // const [INTmod, setINTmod] = useState(0)
+    // const [WISmod, setWISmod] = useState(0)
+    // const [CHAmod, setCHAmod] = useState(0)
+    //
+    // const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
 
-    const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
+    const [charName, setCharName] = useState('')
+    const [charLevel, setCharLevel] = useState('')
+    const [charClass, setCharClass] = useState('')
+    const [charSubClass,setCharSubClass] = useState('')
+    const [charRace, setCharRace] = useState('')
+    const [charBackground, setCharBackground] = useState('')
+    const [charAlignment, setCharAlignment] = useState('')
 
-    const [charName, setCharName] = useState('Code The Cool')
-    const [charLevel, setCharLevel] = useState(1)
-    const [charClass, setCharClass] = useState('wizard')
-    const [charRace, setCharRace] = useState('human')
-    const [charBackground, setCharBackground] = useState('sage')
-
-    const basicInfos = ["Name"]
     const basicInfoStates = [charName, charLevel, charClass, charRace, charBackground]
 
     // const selectsRef = useRef(null);
