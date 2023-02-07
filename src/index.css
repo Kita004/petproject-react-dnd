@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .App {
+
 }
 
 code {
@@ -21,4 +22,14 @@ code {
 Header {
   display: flex;
   justify-content: space-between;
+}
+
+.basicInfoSelect:disabled {
+  background: transparent;
+  border: none;
+  appearance: none;
+}
+
+select {
+  width: clamp(200px, 10vw, 200px);
 }
