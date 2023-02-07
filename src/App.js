@@ -87,6 +87,33 @@ function App() {
         changeStat(statName, statValue);
     }
 
+    useEffect(() => {
+        fetchCharacter();
+    }, [])
+
+    const fetchCharacter = async () => {
+        try {
+            const res = await api.get('/character')
+            setCharacterInfo(res.data)
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data)
+            } else {
+                console.log("ERROR: " + e)
+            }
+        }
+    }
+
+    const setCharacterInfo = (character) => {
+        setCharName(character.name)
+        setCharClass(character.class)
+        setCharSubClass(character.subClass)
+        setCharRace(character.race)
+        setCharLevel(character.level)
+        setCharBackground(character.background)
+        setCharAlignment(character.alignment)
+    }
+
     const removeOption = (statId, statValue) => {
         // if statement so that default value does not remove default option
         if (statValue !== "-") {
