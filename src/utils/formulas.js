@@ -6,8 +6,8 @@ export function calculateMaxHP(hitDice, level, conMOD) {
     return level * (hitDice / 2 + 1) + conMOD;
 }
 
-export function calculateWithProficiency(stat, modifier) {
-    return stat + modifier;
+export function calculateWithProficiency(stat, proficiency) {
+    return stat + proficiency;
 }
 
 export function calculateStatMod(stat) {
