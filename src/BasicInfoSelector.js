@@ -1,11 +1,15 @@
 import React from "react";
+import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({charName, charLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
+const BasicInfoSelector = ({statStates, charName, charLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
-    const CLASSES = ["artificer", "bard", "barbarian", "cleric"]
+    const CLASSES = ["artificer", "bard", "barbarian", "cleric", "wizard"]
     const RACES = ["human", "dwarf", "elf"]
-    const BACKGROUNDS = ["spy", "entertainer", "charlatan"]
+    const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
     const ALIGNMENTS = ["CE", "CN", "CG"]
+
+    let proficiency = formulas.calculateProficiency(charLevel)
+    let initiative = formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), proficiency)
 
     return <div id="BasicInfoSelector">
         <h2>Basic Info</h2>
@@ -18,7 +22,7 @@ const BasicInfoSelector = ({charName, charLevel, charClass, charSubClass, charRa
                 </td>
                 <td>Race:</td>
                 <td>
-                    <select name="raceSelect" id="raceSelect" className="basicInfoSelect" defaultValue={charRace} disabled>
+                    <select name="raceSelect" id="raceSelect" className="basicInfoSelect" disabled>
                         <option value="-">--RACE--</option>
                         {RACES.map(race => {
                             return <option key={RACES.indexOf(race)} value={race}>{race}</option>
@@ -29,7 +33,7 @@ const BasicInfoSelector = ({charName, charLevel, charClass, charSubClass, charRa
             <tr>
                 <td>Class:</td>
                 <td>
-                    <select name="classSelect" id="classSelect" className="basicInfoSelect" defaultValue={charClass}>
+                    <select name="classSelect" id="classSelect" className="basicInfoSelect">
                         <option value="-">--CLASS--</option>
                         {CLASSES.map(CLASS => {
                             return <option key={CLASSES.indexOf(CLASS)} value={charClass}>
@@ -47,7 +51,7 @@ const BasicInfoSelector = ({charName, charLevel, charClass, charSubClass, charRa
                 <td>Level:</td>
                 <td><input type="number" min="1" max={MAX_LEVEL} defaultValue={charLevel} disabled/></td>
                 <td>Proficiency:</td>
-                <td>**Insert Calculation**</td>
+                <td>{proficiency}</td>
             </tr>
             <tr>
                 <td>Background:</td>
@@ -71,13 +75,13 @@ const BasicInfoSelector = ({charName, charLevel, charClass, charSubClass, charRa
             </tr>
             <tr>
                 <td>Hit Dice:</td>
-                <td>20/6</td>
+                <td>{charLevel}/6</td>
                 <td>Max HP:</td>
                 <td>9999</td>
             </tr>
             <tr>
                 <td>Initiative:</td>
-                <td>+5</td>
+                <td>{initiative}</td>
                 <td>Armor Class:</td>
                 <td>42</td>
             </tr>
