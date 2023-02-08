@@ -7,6 +7,7 @@ import Header from "./Header";
 import SkillsSelector from "./SkillsSelector";
 import DiceRoller from "./DiceRoller";
 import api from "./utils/api";
+import * as formulas from "./utils/formulas";
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
@@ -57,8 +58,11 @@ function App() {
     const [charRace, setCharRace] = useState('')
     const [charBackground, setCharBackground] = useState('')
     const [charAlignment, setCharAlignment] = useState('')
+    const [proficiency, setProficiency] = useState(0)
+    const [initiative, setInitiative] = useState(0)
 
-    const basicInfoStates = [charName, charLevel, charClass, charRace, charBackground]
+
+    // const basicInfoStates = [charName, charLevel, charClass, charRace, charBackground]
 
     // const selectsRef = useRef(null);
     // const selects2 = selectsRef.current;
@@ -80,7 +84,8 @@ function App() {
         const statId = e.target.id;
         const statName = e.target.name;
         const statValue = e.target.value;
-        const valueToRepair = document.getElementById(statId).textContent;
+        const valueToRepair = document.getElementById(statId).value;
+
 
         removeOption(statId, statValue);
         repairOption(valueToRepair);
@@ -112,6 +117,9 @@ function App() {
         setCharLevel(character.level)
         setCharBackground(character.background)
         setCharAlignment(character.alignment)
+
+        setProficiency(formulas.calculateProficiency(character.level))
+        setInitiative(formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), proficiency))
     }
 
     const removeOption = (statId, statValue) => {
@@ -173,6 +181,8 @@ function App() {
             <div className="container">
                 <div>
                     <BasicInfoSelector
+                        statStates={statStates}
+
                         charName={charName}
                         charClass={charClass}
                         charSubClass={charSubClass}
@@ -180,6 +190,8 @@ function App() {
                         charLevel={charLevel}
                         charBackground={charBackground}
                         charAlignment={charAlignment}
+
+                        setCharLevel={setCharLevel}
                     />
                     <h2>Attributes</h2>
                     <div id="attributesContainer" className="container attributes">
@@ -198,6 +210,11 @@ function App() {
                 />
             </div>
             <DiceRoller />
+            {/*<StatSelector*/}
+            {/*    stats={stats}*/}
+            {/*    nums={nums}*/}
+            {/*    handleOptionChange={handleStatChange}*/}
+            {/*/>*/}
         </div>
     );
 }

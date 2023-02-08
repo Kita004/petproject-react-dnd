@@ -1,15 +1,20 @@
 import React from "react";
 import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({statStates, charName, charLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
+const BasicInfoSelector = ({statStates, charName, charLevel, setCharLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
     const CLASSES = ["artificer", "bard", "barbarian", "cleric", "wizard"]
     const RACES = ["human", "dwarf", "elf"]
     const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
     const ALIGNMENTS = ["CE", "CN", "CG"]
 
-    let proficiency = formulas.calculateProficiency(charLevel)
-    let initiative = formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), proficiency)
+    let charP = formulas.calculateProficiency(charLevel)
+    let charI = formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), charP)
+
+    const handleLevelChange = (e) => {
+        const newLevel = e.target.value
+        setCharLevel(newLevel)
+    }
 
     return <div id="BasicInfoSelector">
         <h2>Basic Info</h2>
@@ -49,9 +54,9 @@ const BasicInfoSelector = ({statStates, charName, charLevel, charClass, charSubC
             </tr>
             <tr>
                 <td>Level:</td>
-                <td><input type="number" min="1" max={MAX_LEVEL} defaultValue={charLevel} disabled/></td>
+                <td><input type="number" min="1" max={MAX_LEVEL} defaultValue={charLevel} onChange={e => handleLevelChange(e)}/></td>
                 <td>Proficiency:</td>
-                <td>{proficiency}</td>
+                <td>{charP}</td>
             </tr>
             <tr>
                 <td>Background:</td>
@@ -81,7 +86,7 @@ const BasicInfoSelector = ({statStates, charName, charLevel, charClass, charSubC
             </tr>
             <tr>
                 <td>Initiative:</td>
-                <td>{initiative}</td>
+                <td>{charI}</td>
                 <td>Armor Class:</td>
                 <td>42</td>
             </tr>
