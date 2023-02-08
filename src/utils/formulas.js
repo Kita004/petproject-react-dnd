@@ -3,7 +3,12 @@ export function calculateProficiency(level) {
 }
 
 export function calculateMaxHP(hitDice, level, conMOD) {
-    return level * (hitDice / 2 + 1) + conMOD;
+    let baseHP = hitDice + conMOD
+
+    if (level == 1) {
+        return baseHP
+    }
+    return baseHP + (level * (hitDice / 2 + 1) + conMOD);
 }
 
 export function calculateWithProficiency(stat, proficiency) {
