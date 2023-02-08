@@ -1,5 +1,5 @@
 export function calculateProficiency(level) {
-    return level / 4;
+    return Math.floor(2 + (level - 1) / 4);
 }
 
 export function calculateMaxHP(hitDice, level, conMOD) {
