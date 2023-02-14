@@ -110,6 +110,7 @@ function App() {
     const setClassSelectOptions = (classes) => {
         for (let cl of classes) {
             setClassOptions(prevState => new Set(prevState).add(cl.name))
+            console.log(typeof cl.name)
         }
     }
 
@@ -182,6 +183,7 @@ function App() {
                 <div>
                     <BasicInfoSelector
                         statStates={statStates}
+                        classOptions={classOptions}
 
                         charName={charName}
                         charClass={charClass}

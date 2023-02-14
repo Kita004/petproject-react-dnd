@@ -1,7 +1,7 @@
 import React from "react";
 import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({statStates, charName, charLevel, setCharLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
+const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCharLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
     const CLASSES = ["artificer", "bard", "barbarian", "cleric", "wizard"]
     const RACES = ["human", "dwarf", "elf"]
@@ -40,8 +40,8 @@ const BasicInfoSelector = ({statStates, charName, charLevel, setCharLevel, charC
                 <td>
                     <select name="classSelect" id="classSelect" className="basicInfoSelect">
                         <option value="-">--CLASS--</option>
-                        {CLASSES.map(CLASS => {
-                            return <option key={CLASSES.indexOf(CLASS)} value={charClass}>
+                        {[...classOptions].map(CLASS => {
+                            return <option key={[...classOptions].indexOf(CLASS)} value={charClass}>
                                 {CLASS}
                             </option>
                         })}
