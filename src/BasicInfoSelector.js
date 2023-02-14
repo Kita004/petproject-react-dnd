@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCharLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
+const BasicInfoSelector = ({statStates, classOptions, classDetail, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
     const CLASSES = ["artificer", "bard", "barbarian", "cleric", "wizard"]
     const RACES = ["human", "dwarf", "elf"]
     const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
     const ALIGNMENTS = ["CE", "CN", "CG"]
 
-    const [hitDie, setHitDie] = useState(6)
+    // let hitDIE = classDetail.hitDie
+    // console.log(hitDIE)
+
+    let hitDie = 6
 
     let charP = formulas.calculateProficiency(charLevel)
     let charI = formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), charP)
@@ -16,6 +19,11 @@ const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCh
     const handleLevelChange = (e) => {
         const newLevel = e.target.value
         setCharLevel(newLevel)
+    }
+
+    const handleClassChange = (e) => {
+        const selectedClass = e.target.value
+        setCharClass(selectedClass)
     }
 
     return <div id="BasicInfoSelector">
@@ -40,7 +48,7 @@ const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCh
             <tr>
                 <td>Class:</td>
                 <td>
-                    <select name="classSelect" id="classSelect" className="basicInfoSelect">
+                    <select name="classSelect" id="classSelect" className="basicInfoSelect" onChange={e => handleClassChange(e)}>
                         <option value="-">--CLASS--</option>
                         {[...classOptions].map(CLASS => {
                             return <option key={[...classOptions].indexOf(CLASS)} value={CLASS.index}>

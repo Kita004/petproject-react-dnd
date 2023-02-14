@@ -34,6 +34,8 @@ function App() {
     }
 
     const [classOptions, setClassOptions] = useState(new Set())
+    const [classDetail, setClassDetail] = useState(null)
+
 
     const [STR, setSTR] = useState(8);
     const [DEX, setDEX] = useState(10);
@@ -78,7 +80,26 @@ function App() {
     useEffect(() => {
         fetchCharacter();
         fetchDndAPI();
+        fetchClassDetail();
     }, [])
+
+    useEffect(() => {
+        fetchClassDetail();
+    }, [charClass])
+
+    const fetchClassDetail = async () => {
+        try {
+            const resClassDetail = await api.get('https://www.dnd5eapi.co/api/classes/' + charClass)
+            setClassDetail(resClassDetail.data)
+            console.log(resClassDetail.data)
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data)
+            } else {
+                console.log("ERROR: " + e)
+            }
+        }
+    }
 
     const fetchCharacter = async () => {
         try {
@@ -183,6 +204,7 @@ function App() {
                     <BasicInfoSelector
                         statStates={statStates}
                         classOptions={classOptions}
+                        classDetail={classDetail}
 
                         charName={charName}
                         charClass={charClass}
@@ -193,6 +215,7 @@ function App() {
                         charAlignment={charAlignment}
 
                         setCharLevel={setCharLevel}
+                        setCharClass={setCharClass}
                     />
                     <h2>Attributes</h2>
                     <div id="attributesContainer" className="container attributes">
