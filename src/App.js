@@ -83,7 +83,7 @@ function App() {
     const fetchCharacter = async () => {
         try {
             const res = await api.get('/character')
-            setCharacterInfo(res.data)
+            setCharacterStates(res.data)
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data)
@@ -97,7 +97,7 @@ function App() {
         try {
             // fetch DnD classes for Class Select
             const resClass = await api.get('https://www.dnd5eapi.co/api/classes')
-            setClassSelectOptions(resClass.data.results)
+            setClassOptionsState(resClass.data.results)
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data)
@@ -107,14 +107,13 @@ function App() {
         }
     }
 
-    const setClassSelectOptions = (classes) => {
+    const setClassOptionsState = (classes) => {
         for (let cl of classes) {
-            setClassOptions(prevState => new Set(prevState).add(cl.name))
-            console.log(typeof cl.name)
+            setClassOptions(prevState => new Set(prevState).add(cl))
         }
     }
 
-    const setCharacterInfo = (character) => {
+    const setCharacterStates = (character) => {
         setCharName(character.name)
         setCharClass(character.class)
         setCharSubClass(character.subClass)
