@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
 const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCharLevel, charClass, charSubClass, charRace, charBackground, charAlignment}) => {
@@ -7,6 +7,8 @@ const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCh
     const RACES = ["human", "dwarf", "elf"]
     const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
     const ALIGNMENTS = ["CE", "CN", "CG"]
+
+    const [hitDie, setHitDie] = useState(6)
 
     let charP = formulas.calculateProficiency(charLevel)
     let charI = formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), charP)
@@ -41,8 +43,8 @@ const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCh
                     <select name="classSelect" id="classSelect" className="basicInfoSelect">
                         <option value="-">--CLASS--</option>
                         {[...classOptions].map(CLASS => {
-                            return <option key={[...classOptions].indexOf(CLASS)} value={charClass}>
-                                {CLASS}
+                            return <option key={[...classOptions].indexOf(CLASS)} value={CLASS.index}>
+                                {CLASS.name}
                             </option>
                         })}
                     </select>
@@ -80,9 +82,9 @@ const BasicInfoSelector = ({statStates, classOptions, charName, charLevel, setCh
             </tr>
             <tr>
                 <td>Hit Dice:</td>
-                <td>{charLevel}/6</td>
+                <td>{charLevel}/{hitDie}</td>
                 <td>Max HP:</td>
-                <td>9999</td>
+                <td>{formulas.calculateMaxHP(hitDie, charLevel, formulas.calculateStatMod(statStates[2]))}</td>
             </tr>
             <tr>
                 <td>Initiative:</td>
