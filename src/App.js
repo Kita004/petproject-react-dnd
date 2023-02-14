@@ -1,4 +1,6 @@
 import {useEffect, useState} from "react";
+import api from "./utils/api";
+
 import StatSelector from "./StatSelector";
 import StatContainer from "./StatContainer";
 import BasicInfoSelector from "./BasicInfoSelector";
@@ -6,8 +8,8 @@ import SavingThrowSelector from "./SavingThrowSelector";
 import Header from "./Header";
 import SkillsSelector from "./SkillsSelector";
 import DiceRoller from "./DiceRoller";
-import api from "./utils/api";
-import * as formulas from "./utils/formulas";
+
+
 
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
@@ -30,6 +32,8 @@ function App() {
         "stealth": "dex",
         "survival": "wis"
     }
+
+    const [classOptions, setClassOptions] = useState(new Set())
 
     const [STR, setSTR] = useState(8);
     const [DEX, setDEX] = useState(10);
@@ -94,6 +98,7 @@ function App() {
 
     useEffect(() => {
         fetchCharacter();
+        fetchDndAPI();
     }, [])
 
     const fetchCharacter = async () => {
@@ -106,6 +111,26 @@ function App() {
             } else {
                 console.log("ERROR: " + e)
             }
+        }
+    }
+
+    const fetchDndAPI = async () => {
+        try {
+            // fetch DnD classes for Class Select
+            const resClass = await api.get('https://www.dnd5eapi.co/api/classes')
+            setClassSelectOptions(resClass.data.results)
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data)
+            } else {
+                console.log("ERROR: " + e)
+            }
+        }
+    }
+
+    const setClassSelectOptions = (classes) => {
+        for (let cl of classes) {
+            setClassOptions(prevState => new Set(prevState).add(cl.name))
         }
     }
 
@@ -172,7 +197,6 @@ function App() {
                 throw new Error("Error with switch case, ran into default")
         }
     }
-
 
     // render
     return (
