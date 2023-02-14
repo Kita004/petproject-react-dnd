@@ -62,27 +62,6 @@ function App() {
     const [charRace, setCharRace] = useState('')
     const [charBackground, setCharBackground] = useState('')
     const [charAlignment, setCharAlignment] = useState('')
-    const [proficiency, setProficiency] = useState(0)
-    const [initiative, setInitiative] = useState(0)
-
-
-    // const basicInfoStates = [charName, charLevel, charClass, charRace, charBackground]
-
-    // const selectsRef = useRef(null);
-    // const selects2 = selectsRef.current;
-
-    // useEffect(() => {
-    //     selectsRef.current = document.querySelectorAll('.statSelect');
-    //     console.log(selects2);
-    // }, [selects2]);
-
-    // const removeOptionWithRef = (e) => {
-    //     if (e.target.value !== "-") {
-    //         selects2.forEach(select => {
-    //             if (select.id !== e.target.id) {
-    //                 console.log(select);
-    //             }})}
-    // }
 
     const handleStatChange = (e) => {
         const statId = e.target.id;
@@ -142,9 +121,6 @@ function App() {
         setCharLevel(character.level)
         setCharBackground(character.background)
         setCharAlignment(character.alignment)
-
-        setProficiency(formulas.calculateProficiency(character.level))
-        setInitiative(formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), proficiency))
     }
 
     const removeOption = (statId, statValue) => {
