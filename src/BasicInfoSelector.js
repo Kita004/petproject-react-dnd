@@ -3,11 +3,11 @@ import * as formulas from "./utils/formulas"
 
 const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
-    const RACES = ["human", "dwarf", "elf"]
     const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
 
     // let hitDIE = classDetail.hitDie
     // console.log(hitDIE)
+
 
     let hitDie = 6
 
@@ -57,7 +57,7 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
                 </td>
                 <td>Sub-class:</td>
                 <td>
-                    **To be Implemented**
+                    ** To be Implemented **
                 </td>
             </tr>
             <tr>
@@ -96,7 +96,7 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
                 <td>Initiative:</td>
                 <td>{charI}</td>
                 <td>Armor Class:</td>
-                <td>42</td>
+                <td>** +9000 **</td>
             </tr>
             </tbody>
         </table>
