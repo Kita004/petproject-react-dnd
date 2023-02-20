@@ -231,6 +231,8 @@ function App() {
                         />
                         <SavingThrowSelector
                             stats={stats}
+                            statStates={statStates}
+                            charLevel={charLevel}
                         />
                     </div>
                 </div>
