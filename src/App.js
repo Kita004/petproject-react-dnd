@@ -7,7 +7,7 @@ import BasicInfoSelector from "./BasicInfoSelector";
 import SavingThrowSelector from "./SavingThrowSelector";
 import Header from "./Header";
 import SkillsSelector from "./SkillsSelector";
-import DiceRoller from "./DiceRoller";
+import RollPopupButton from "./RollPopupButton";
 
 
 
@@ -33,8 +33,10 @@ function App() {
         "survival": "wis"
     }
 
-    const [classOptions, setClassOptions] = useState(new Set())
+    const [classOptions, setClassOptions] = useState([])
     const [classDetail, setClassDetail] = useState(null)
+    const [alignmentOptions, setAlignmentOptions] = useState([])
+    const [raceOptions, setRaceOptions] = useState([]);
 
 
     const [STR, setSTR] = useState(8);
@@ -91,7 +93,6 @@ function App() {
         try {
             const resClassDetail = await api.get('https://www.dnd5eapi.co/api/classes/' + charClass)
             setClassDetail(resClassDetail.data)
-            console.log(resClassDetail.data)
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data)
@@ -116,21 +117,23 @@ function App() {
 
     const fetchDndAPI = async () => {
         try {
-            // fetch DnD classes for Class Select
-            const resClass = await api.get('https://www.dnd5eapi.co/api/classes')
-            setClassOptionsState(resClass.data.results)
+            // fetch classes for Class Select
+            const resClasses = await api.get('https://www.dnd5eapi.co/api/classes')
+            setClassOptions(resClasses.data.results)
+
+            // fetch alignments for Alignment Select
+            const resAlignments = await api.get('https://www.dnd5eapi.co/api/alignments')
+            setAlignmentOptions(resAlignments.data.results)
+
+            // fetch classes for Class Select
+            const resRaces = await api.get('https://www.dnd5eapi.co/api/races')
+            setRaceOptions(resRaces.data.results)
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data)
             } else {
                 console.log("ERROR: " + e)
             }
-        }
-    }
-
-    const setClassOptionsState = (classes) => {
-        for (let cl of classes) {
-            setClassOptions(prevState => new Set(prevState).add(cl))
         }
     }
 
@@ -205,6 +208,8 @@ function App() {
                         statStates={statStates}
                         classOptions={classOptions}
                         classDetail={classDetail}
+                        alignmentOptions={alignmentOptions}
+                        raceOptions={raceOptions}
 
                         charName={charName}
                         charClass={charClass}
@@ -233,7 +238,14 @@ function App() {
                     skills={skills}
                 />
             </div>
-            <DiceRoller />
+            <div>
+                <h2>Dice Roller</h2>
+                <RollPopupButton
+
+                />
+                <button>2</button>
+                <button>3</button>
+            </div>
             {/*<StatSelector*/}
             {/*    stats={stats}*/}
             {/*    nums={nums}*/}

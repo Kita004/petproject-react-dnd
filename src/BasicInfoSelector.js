@@ -1,12 +1,10 @@
 import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({statStates, classOptions, classDetail, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
+const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
-    const CLASSES = ["artificer", "bard", "barbarian", "cleric", "wizard"]
     const RACES = ["human", "dwarf", "elf"]
     const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
-    const ALIGNMENTS = ["CE", "CN", "CG"]
 
     // let hitDIE = classDetail.hitDie
     // console.log(hitDIE)
@@ -37,10 +35,10 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, charName, cha
                 </td>
                 <td>Race:</td>
                 <td>
-                    <select name="raceSelect" id="raceSelect" className="basicInfoSelect" disabled>
+                    <select name="raceSelect" id="raceSelect" className="basicInfoSelect" >
                         <option value="-">--RACE--</option>
-                        {RACES.map(race => {
-                            return <option key={RACES.indexOf(race)} value={race}>{race}</option>
+                        {raceOptions.map(race => {
+                            return <option key={raceOptions.indexOf(race)} value={race.index}>{race.name}</option>
                         })}
                     </select>
                 </td>
@@ -82,8 +80,8 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, charName, cha
                 <td>
                     <select name="alignmentSelect" id="alignmentSelect">
                         <option value="-">--ALIGNMENT--</option>
-                        {ALIGNMENTS.map(alignment => {
-                            return <option key={ALIGNMENTS.indexOf(alignment)} value={alignment}>{alignment}</option>
+                        {alignmentOptions.map(alignment => {
+                            return <option key={alignmentOptions.indexOf(alignment)} value={alignment.index}>{alignment.name}</option>
                         })}
                     </select>
                 </td>
