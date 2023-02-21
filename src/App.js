@@ -37,7 +37,7 @@ function App() {
     const [classDetail, setClassDetail] = useState(null)
     const [alignmentOptions, setAlignmentOptions] = useState([])
     const [raceOptions, setRaceOptions] = useState([]);
-
+    const [backgroundOptions, setBackgroundOptions] = useState([])
 
     const [STR, setSTR] = useState(8);
     const [DEX, setDEX] = useState(10);
@@ -83,11 +83,22 @@ function App() {
         fetchCharacter();
         fetchDndAPI();
         fetchClassDetail();
+
+        // setSelectOption()
     }, [])
 
     useEffect(() => {
         fetchClassDetail();
     }, [charClass])
+
+    // const setSelectOption = () => {
+    //     const alignmentSelect = document.getElementById("alignmentSelect");
+    //     for (let op of alignmentSelect.options) {
+    //         // if (charAlignment == op.value) {
+    //             console.log(op)
+    //         // }
+    //     }
+    // }
 
     const fetchClassDetail = async () => {
         try {
@@ -128,6 +139,10 @@ function App() {
             // fetch classes for Class Select
             const resRaces = await api.get('https://www.dnd5eapi.co/api/races')
             setRaceOptions(resRaces.data.results)
+
+            // fetch Backgrounds for Background Select
+            const resBg = await  api.get('https://www.dnd5eapi.co/api/backgrounds')
+            setBackgroundOptions(resBg.data.results)
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data)
@@ -210,6 +225,8 @@ function App() {
                         classDetail={classDetail}
                         alignmentOptions={alignmentOptions}
                         raceOptions={raceOptions}
+                        backgroundOptions={backgroundOptions}
+
 
                         charName={charName}
                         charClass={charClass}

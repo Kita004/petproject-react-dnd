@@ -1,13 +1,11 @@
 import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
+const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, backgroundOptions, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
-    const BACKGROUNDS = ["spy", "entertainer", "charlatan", "scholar"]
 
     // let hitDIE = classDetail.hitDie
     // console.log(hitDIE)
-
 
     let hitDie = 6
 
@@ -71,8 +69,8 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
                 <td>
                     <select name="backgroundSelect" id="backgroundSelect">
                         <option value="-">--BACKGROUND--</option>
-                        {BACKGROUNDS.map(bg => {
-                            return <option key={BACKGROUNDS.indexOf(bg)} value={bg}>{bg}</option>
+                        {backgroundOptions.map(bg => {
+                            return <option key={backgroundOptions.indexOf(bg)} value={bg.index}>{bg.name}</option>
                         })}
                     </select>
                 </td>
