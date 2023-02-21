@@ -4,6 +4,7 @@ import * as formulas from "./utils/formulas"
 const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, backgroundOptions, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, charBackground, charAlignment}) => {
     const MAX_LEVEL = 20;
 
+
     // let hitDIE = classDetail.hitDie
     // console.log(hitDIE)
 
@@ -33,7 +34,7 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
                 </td>
                 <td>Race:</td>
                 <td>
-                    <select name="raceSelect" id="raceSelect" className="basicInfoSelect" >
+                    <select name="raceSelect" id="raceSelect" className="basicInfoSelect" value={charRace}>
                         <option value="-">--RACE--</option>
                         {raceOptions.map(race => {
                             return <option key={raceOptions.indexOf(race)} value={race.index}>{race.name}</option>
@@ -76,7 +77,7 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
                 </td>
                 <td>Alignment:</td>
                 <td>
-                    <select name="alignmentSelect" id="alignmentSelect">
+                    <select name="alignmentSelect" id="alignmentSelect" value={charAlignment}>
                         <option value="-">--ALIGNMENT--</option>
                         {alignmentOptions.map(alignment => {
                             return <option key={alignmentOptions.indexOf(alignment)} value={alignment.index}>{alignment.name}</option>
