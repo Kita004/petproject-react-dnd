@@ -4,10 +4,10 @@
     "name": "Code The Cool",
     "level": 20,
     "class": "wizard",
-    "subClass": "school of illusion",
+    "subClass": "school-of-illusion",
     "race": "human",
     "background": "scholar",
-    "alignment": "CE",
+    "alignment": "chaotic-good",
     "stats": {
       "str": 20,
       "dex": 20,
