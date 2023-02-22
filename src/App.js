@@ -50,14 +50,14 @@ function App() {
 
     const selects = document.getElementsByClassName('statSelect');
 
-    // const [STRmod, setSTRmod] = useState(0)
-    // const [DEXmod, setDEXmod] = useState(0)
-    // const [CONmod, setCONmod] = useState(0)
-    // const [INTmod, setINTmod] = useState(0)
-    // const [WISmod, setWISmod] = useState(0)
-    // const [CHAmod, setCHAmod] = useState(0)
-    //
-    // const modStates = [STRmod, DEXmod, CONmod, INTmod, WISmod, CHAmod]
+    const [STRsaving, setSTRsaving] = useState(false);
+    const [DEXsaving, setDEXsaving] = useState(false);
+    const [CONsaving, setCONsaving] = useState(false);
+    const [INTsaving, setINTsaving] = useState(true);
+    const [WISsaving, setWISsaving] = useState(true);
+    const [CHAsaving, setCHAsaving] = useState(true);
+
+    const savingThrowStates = [STRsaving, DEXsaving, CONsaving, INTsaving, WISsaving, CHAsaving];
 
     const [charName, setCharName] = useState('')
     const [charLevel, setCharLevel] = useState('')
@@ -83,22 +83,12 @@ function App() {
         fetchCharacter();
         fetchDndAPI();
         fetchClassDetail();
-
-        // setSelectOption()
     }, [])
 
     useEffect(() => {
         fetchClassDetail();
     }, [charClass])
 
-    // const setSelectOption = () => {
-    //     const alignmentSelect = document.getElementById("alignmentSelect");
-    //     for (let op of alignmentSelect.options) {
-    //         // if (charAlignment == op.value) {
-    //             console.log(op)
-    //         // }
-    //     }
-    // }
 
     const fetchClassDetail = async () => {
         try {
@@ -249,6 +239,8 @@ function App() {
                         <SavingThrowSelector
                             stats={stats}
                             statStates={statStates}
+                            savingThrowStates={savingThrowStates}
+
                             charLevel={charLevel}
                         />
                     </div>
@@ -265,11 +257,6 @@ function App() {
                 <button>2</button>
                 <button>3</button>
             </div>
-            {/*<StatSelector*/}
-            {/*    stats={stats}*/}
-            {/*    nums={nums}*/}
-            {/*    handleOptionChange={handleStatChange}*/}
-            {/*/>*/}
         </div>
     );
 }
