@@ -6,10 +6,14 @@ const SavingThrowSelector = ({stats, statStates, charLevel, savingThrowStates}) 
         <table id="savingThrowTable" className="characterTable">
             <tbody>
             {stats.map(stat => {
+                let statMod = formulas.calculateStatMod(statStates[stats.indexOf(stat)]);
+                let proficiency = formulas.calculateProficiency(charLevel)
+                let classSavingThrow = savingThrowStates[stats.indexOf(stat)];
+
                 return <tr key={stat + "Row"}>
-                    <td><input id={stat + "savingCheckbox"} type="checkbox" checked={savingThrowStates[stats.indexOf(stat)]} readOnly={true}/></td>
+                    <td><input id={stat + "savingCheckbox"} type="checkbox" checked={classSavingThrow} readOnly={true}/></td>
                     <td>Save:</td>
-                    <td id={stat + "saving"}>{formulas.calculateStatMod(statStates[stats.indexOf(stat)]) + formulas.calculateProficiency(charLevel)}</td>
+                    <td id={stat + "saving"}>{classSavingThrow ? statMod + proficiency : statMod}</td>
                 </tr>
             })}
             </tbody>
