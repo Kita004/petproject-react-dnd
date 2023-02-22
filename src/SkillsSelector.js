@@ -40,6 +40,9 @@ const SkillsSelector = ({stats, statStates}) => {
                 })}
             </tbody>
         </table>
+        <div id="pickableSkillsContainer">
+            ** Set of Available Skills should be Here **
+        </div>
     </div>
 }
 
