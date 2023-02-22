@@ -6,7 +6,7 @@
     "class": "wizard",
     "subClass": "school-of-illusion",
     "race": "human",
-    "background": "scholar",
+    "background": "acolyte",
     "alignment": "chaotic-good",
     "stats": {
       "str": 20,
