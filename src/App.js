@@ -53,9 +53,9 @@ function App() {
     const [STRsaving, setSTRsaving] = useState(false);
     const [DEXsaving, setDEXsaving] = useState(false);
     const [CONsaving, setCONsaving] = useState(false);
-    const [INTsaving, setINTsaving] = useState(true);
-    const [WISsaving, setWISsaving] = useState(true);
-    const [CHAsaving, setCHAsaving] = useState(true);
+    const [INTsaving, setINTsaving] = useState(false);
+    const [WISsaving, setWISsaving] = useState(false);
+    const [CHAsaving, setCHAsaving] = useState(false);
 
     const savingThrowStates = [STRsaving, DEXsaving, CONsaving, INTsaving, WISsaving, CHAsaving];
 
@@ -67,17 +67,6 @@ function App() {
     const [charBackground, setCharBackground] = useState('')
     const [charAlignment, setCharAlignment] = useState('')
 
-    const handleStatChange = (e) => {
-        const statId = e.target.id;
-        const statName = e.target.name;
-        const statValue = e.target.value;
-        const valueToRepair = document.getElementById(statId).value;
-
-
-        removeOption(statId, statValue);
-        repairOption(valueToRepair);
-        changeStat(statName, statValue);
-    }
 
     useEffect(() => {
         fetchCharacter();
@@ -94,6 +83,7 @@ function App() {
         try {
             const resClassDetail = await api.get('https://www.dnd5eapi.co/api/classes/' + charClass)
             setClassDetail(resClassDetail.data)
+            setSavingThrowStates(resClassDetail.data.saving_throws)
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data)
@@ -152,6 +142,38 @@ function App() {
         setCharAlignment(character.alignment)
     }
 
+    const setSavingThrowStates = (savingThrows) => {
+        let savingThrowNames = [];
+
+        // get names from Array of Objects
+        for (let st of savingThrows) {
+            savingThrowNames.push(st.name)
+        }
+
+        // set all states to false, beforehand
+        for (let stat of stats) {
+            changeState(stat + "saving", false)
+        }
+
+        for (let stat of stats) {
+            if (savingThrowNames.includes(stat)) {
+                changeState(stat + "saving", true);
+            }
+        }
+    }
+
+    const handleStatChange = (e) => {
+        const statId = e.target.id;
+        const statName = e.target.name;
+        const statValue = e.target.value;
+        const valueToRepair = document.getElementById(statId).value;
+
+
+        removeOption(statId, statValue);
+        repairOption(valueToRepair);
+        changeState(statName, statValue);
+    }
+
     const removeOption = (statId, statValue) => {
         // if statement so that default value does not remove default option
         if (statValue !== "-") {
@@ -171,32 +193,45 @@ function App() {
                 }}}
     }
 
-    const changeStat = (statName, statValue) => {
-        // const modValue = Math.floor((statValue-10)/2);
+
+
+    const changeState = (statName, statValue) => {
         switch (statName) {
             case "STR":
                 setSTR(statValue)
-                // setSTRmod(modValue)
                 break
             case "DEX":
                 setDEX(statValue)
-                // setDEXmod(modValue)
                 break
             case "CON":
                 setCON(statValue)
-                // setCONmod(modValue)
                 break
             case "INT":
                 setINT(statValue)
-                // setINTmod(modValue)
                 break
             case "WIS":
                 setWIS(statValue)
-                // setWISmod(modValue)
                 break
             case "CHA":
                 setCHA(statValue)
-                // setCHAmod(modValue)
+                break
+            case "STRsaving":
+                setSTRsaving(statValue)
+                break
+            case "DEXsaving":
+                setDEXsaving(statValue)
+                break
+            case "CONsaving":
+                setCONsaving(statValue)
+                break
+            case "INTsaving":
+                setINTsaving(statValue)
+                break
+            case "WISsaving":
+                setWISsaving(statValue)
+                break
+            case "CHAsaving":
+                setCHAsaving(statValue)
                 break
             default:
                 throw new Error("Error with switch case, ran into default")
@@ -234,7 +269,7 @@ function App() {
                         <StatContainer
                             stats={stats}
                             statStates={statStates}
-                            changeStat={changeStat}
+                            changeState={changeState}
                         />
                         <SavingThrowSelector
                             stats={stats}

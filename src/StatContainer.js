@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
-const StatContainer = ({statStates, stats, changeStat}) => {
+const StatContainer = ({statStates, stats, changeState}) => {
 
     return <div id="statContainer">
         <table id="statContainerTable" className="characterTable">
@@ -10,7 +10,7 @@ const StatContainer = ({statStates, stats, changeStat}) => {
                     return <tr key={stat + "Row"}>
                         <td>{stat}</td>
                         <td>
-                            <input onChange={e => changeStat(stat, e.target.value)} id={stat + "container"} type="number" min="1" max="20" defaultValue={statStates[stats.indexOf(stat)]}/>
+                            <input onChange={e => changeState(stat, e.target.value)} id={stat + "container"} type="number" min="1" max="20" defaultValue={statStates[stats.indexOf(stat)]}/>
                         </td>
                         <td>{formulas.calculateStatMod(statStates[stats.indexOf(stat)])}</td>
                     </tr>
