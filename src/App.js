@@ -14,24 +14,7 @@ import RollPopupButton from "./RollPopupButton";
 function App() {
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"]
     const nums = [8,10,12,13,14,15]
-    const skills = {
-        "acrobatics": "dex",
-        "animal handling": "wis",
-        "arcana": "int",
-        "athletics": "str",
-        "deception": "cha",
-        "history": "int",
-        "insight": "intimidation",
-        "investigation": "int",
-        "medicine": "wis",
-        "nature": "int",
-        "perception": "wis",
-        "persuasion": "cha",
-        "religion": "int",
-        "sleight of hand": "dex",
-        "stealth": "dex",
-        "survival": "wis"
-    }
+
 
     const [classOptions, setClassOptions] = useState([])
     const [classDetail, setClassDetail] = useState(null)
@@ -155,6 +138,7 @@ function App() {
             changeState(stat + "saving", false)
         }
 
+        // set state to true according to condition
         for (let stat of stats) {
             if (savingThrowNames.includes(stat)) {
                 changeState(stat + "saving", true);
@@ -281,7 +265,8 @@ function App() {
                     </div>
                 </div>
                 <SkillsSelector
-                    skills={skills}
+                    stats={stats}
+                    statStates={statStates}
                 />
             </div>
             <div>
