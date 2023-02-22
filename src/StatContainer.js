@@ -12,7 +12,8 @@ const StatContainer = ({statStates, stats, changeState}) => {
                         <td>
                             <input onChange={e => changeState(stat, e.target.value)} id={stat + "container"} type="number" min="1" max="20" defaultValue={statStates[stats.indexOf(stat)]}/>
                         </td>
-                        <td>{formulas.calculateStatMod(statStates[stats.indexOf(stat)])}</td>
+                        <td>{"Mod: " + formulas.calculateStatMod(statStates[stats.indexOf(stat)])}</td>
+                        <td>+ <input type="number" placeholder={"Ability Score Improvement"} disabled/></td>
                         <td>** Race Bonus **</td>
                     </tr>
                 }
