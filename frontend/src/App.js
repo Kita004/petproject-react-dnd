@@ -21,12 +21,12 @@ function App() {
     const [raceOptions, setRaceOptions] = useState([]);
     const [backgroundOptions, setBackgroundOptions] = useState([]);
 
-    const [STR, setSTR] = useState(8);
+    const [STR, setSTR] = useState(10);
     const [DEX, setDEX] = useState(10);
-    const [CON, setCON] = useState(12);
-    const [INT, setINT] = useState(13);
-    const [WIS, setWIS] = useState(14);
-    const [CHA, setCHA] = useState(15);
+    const [CON, setCON] = useState(10);
+    const [INT, setINT] = useState(10);
+    const [WIS, setWIS] = useState(10);
+    const [CHA, setCHA] = useState(10);
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA];
 
@@ -219,7 +219,7 @@ function App() {
         }
     };
 
-    const createCharacter = async () => {
+    const buildCharacter = async () => {
         const newChar = {
             "name": charName,
             "level": charLevel,
@@ -238,8 +238,18 @@ function App() {
             },
             "skills": ["to be implemented"],
         };
-        await api.post("/character", newChar)
+        return newChar;
     };
+
+
+    const createCharacter = async () => {
+        const char = buildCharacter();
+        await api.post("/character", char)
+    }
+
+    const updateCharacter = async (id) => {
+        
+    }
 
     // render
     return (

@@ -5,6 +5,10 @@ export function calculateProficiency(level) {
 export function calculateMaxHP(hitDice, level, conMOD) {
     let baseHP = hitDice + conMOD
 
+    if (!hitDice) {
+        return
+    }
+
     if (level == 1) {
         return baseHP
     }

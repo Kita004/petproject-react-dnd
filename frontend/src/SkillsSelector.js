@@ -1,7 +1,9 @@
 import React from "react";
 import * as formulas from './utils/formulas';
 
-const SkillsSelector = ({stats, statStates}) => {
+const SkillsSelector = ({stats, statStates, classDetail, raceDetail}) => {
+    let classSkills = classDetail?.proficiency_choices?.[0]?.from ?? 0;
+
     const skills = {
         "acrobatics": "dex",
         "animal handling": "wis",
@@ -41,7 +43,7 @@ const SkillsSelector = ({stats, statStates}) => {
             </tbody>
         </table>
         <div id="pickableSkillsContainer">
-            ** Set of Available Skills should be Here **
+            {}
         </div>
     </div>
 }
