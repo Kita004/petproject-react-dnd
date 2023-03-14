@@ -1,20 +1,19 @@
 {
   "character": {
     "id": 1,
-    "name": "Code The Cool",
+    "name": "Cody The Cool",
     "level": 20,
     "class": "wizard",
     "subClass": "school-of-illusion",
     "race": "human",
     "background": "acolyte",
-    "alignment": "chaotic-good",
+    "alignment": "chaotic-evil",
     "stats": {
-      "str": 20,
-      "dex": 20,
-      "con": 20,
-      "int": 20,
-      "wis": 20,
-      "cha": 20
-    }
+      "str": 8, "dex": 10, "con": 12,
+      "int": 13, "wis": 14, "cha": 15
+    },
+    "skills": [
+      "arcana", "history", "investigation", "persuasion"
+    ]
   }
 }
