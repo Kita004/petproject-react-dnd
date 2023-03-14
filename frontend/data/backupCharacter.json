@@ -1,0 +1,21 @@
+{
+  "name": "Cody The Cool",
+  "level": "20",
+  "class": "wizard",
+  "subClass": "school-of-illusion",
+  "race": "human",
+  "background": "acolyte",
+  "alignment": "chaotic-evil",
+  "stats": {
+    "str": 8,
+    "dex": 10,
+    "con": 12,
+    "int": 13,
+    "wis": 14,
+    "cha": 15
+  },
+  "skills": [
+    "to be implemented"
+  ]
+}
+
