@@ -63,6 +63,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/backend/mvnw
-/backend/mvnw.cmd
-/backend/pom.xml
