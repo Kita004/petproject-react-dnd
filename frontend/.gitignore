@@ -2,8 +2,6 @@
 node_modules/
 out/
 
-frontend/node_modules
-
 # Compiled class file
 *.class
 

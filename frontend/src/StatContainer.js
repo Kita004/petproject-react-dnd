@@ -1,7 +1,6 @@
-import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
-const StatContainer = ({statStates, stats, changeState}) => {
+const StatContainer = ({statStates, stats, changeState, raceDetail}) => {
 
     return <div id="statContainer">
         <table id="statContainerTable" className="characterTable">
@@ -13,8 +12,8 @@ const StatContainer = ({statStates, stats, changeState}) => {
                             <input onChange={e => changeState(stat, e.target.value)} id={stat + "container"} type="number" min="1" max="20" defaultValue={statStates[stats.indexOf(stat)]}/>
                         </td>
                         <td>{"Mod: " + formulas.calculateStatMod(statStates[stats.indexOf(stat)])}</td>
+                        <td>+ ** Race Bonus **</td>
                         <td>+ <input type="number" placeholder={"Ability Score Improvement"} disabled/></td>
-                        <td>** Race Bonus **</td>
                     </tr>
                 }
             )}
