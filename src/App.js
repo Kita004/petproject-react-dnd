@@ -47,7 +47,7 @@ function App() {
     ];
 
     const [charName, setCharName] = useState("");
-    const [charLevel, setCharLevel] = useState("");
+    const [charLevel, setCharLevel] = useState(1);
     const [charClass, setCharClass] = useState("");
     const [charSubClass, setCharSubClass] = useState("");
     const [charRace, setCharRace] = useState("");
@@ -219,33 +219,33 @@ function App() {
         }
     };
 
-    const createCharacter = () => {
+    const createCharacter = async () => {
         const newChar = {
-            name: charName,
-            level: charLevel,
-            class: charClass,
-            subClass: charSubClass,
-            race: charRace,
-            background: charBackground,
-            alignment: charAlignment,
-            stats: {
-                str: STR,
-                dex: DEX,
-                con: CON,
-                int: INT,
-                wis: WIS,
-                cha: CHA,
+            "name": charName,
+            "level": charLevel,
+            "class": charClass,
+            "subClass": charSubClass,
+            "race": charRace,
+            "background": charBackground,
+            "alignment": charAlignment,
+            "stats": {
+                "str": STR,
+                "dex": DEX,
+                "con": CON,
+                "int": INT,
+                "wis": WIS,
+                "cha": CHA,
             },
-            skills: ["to be implemented"],
+            "skills": ["to be implemented"],
         };
-        console.log("new char: " + newChar);
+        await api.post("/character", newChar)
     };
 
     // render
     return (
         <div className="App">
             <Header
-            /*createCharacter={createCharacter}*/
+            createCharacter={createCharacter}
             />
             <div className="container">
                 <div>

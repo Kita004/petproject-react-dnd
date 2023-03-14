@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import * as formulas from "./utils/formulas"
 
-const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, backgroundOptions, charName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, setCharRace, charBackground, setCharBackground, charAlignment, setCharAlignment}) => {
+const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOptions, raceOptions, backgroundOptions, charName, setCharName, charLevel, setCharLevel, charClass, setCharClass, charSubClass, charRace, setCharRace, charBackground, setCharBackground, charAlignment, setCharAlignment}) => {
     const MAX_LEVEL = 20;
-    let hitDie = classDetail ? classDetail.hit_die : 9000;
+    let hitDie = classDetail ? classDetail.hit_die : null;
 
     let charP = formulas.calculateProficiency(charLevel)
     let charI = formulas.calculateWithProficiency(formulas.calculateStatMod(statStates[1]), charP)
@@ -20,7 +20,7 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
             <tr>
                 <td>Name:</td>
                 <td>
-                    <input type="text" id="charName" defaultValue={charName} disabled/>
+                    <input type="text" id="charName" defaultValue={charName} onChange={e => handleOnChange(e, setCharName)}/>
                 </td>
                 <td>Race:</td>
                 <td>
@@ -77,7 +77,7 @@ const BasicInfoSelector = ({statStates, classOptions, classDetail, alignmentOpti
             </tr>
             <tr>
                 <td>Hit Dice:</td>
-                <td>{charLevel}/{classDetail ? hitDie : 9000}</td>
+                <td>{charLevel}/{hitDie}</td>
                 <td>Max HP:</td>
                 <td>{formulas.calculateMaxHP(hitDie, charLevel, formulas.calculateStatMod(statStates[2]))}</td>
             </tr>
