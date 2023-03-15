@@ -3,6 +3,9 @@ package com.codecool.backend.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 
 import java.util.Set;
 
@@ -19,5 +22,6 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "character_id")
+    @Cascade(CascadeType.ALL)
     private Set<Character> characters;
 }

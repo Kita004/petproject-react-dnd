@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Table(name = "characters")
 public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +29,11 @@ public class Character {
     @OneToOne
     @JoinColumn(name = "stats_id")
     @Cascade(CascadeType.ALL)
-    // TODO: make it individual Entity?
+    // TODO: make it individual Fields?
     private Stats stats;
 
     @ElementCollection
-    @Cascade(CascadeType.ALL)
+    @CollectionTable(name = "setOfSkills")
     // TODO: make it individual Entity?
     private Set<String> skills;
 }
