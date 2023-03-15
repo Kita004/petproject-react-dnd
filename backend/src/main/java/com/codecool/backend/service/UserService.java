@@ -22,16 +22,9 @@ public class UserService {
     }
 
 
-    private boolean checkIfUserExists(Long id) {
-        return userRep.existsById(id);
-    }
-
     public List<User> getAllUsers() { return userRep.findAll(); }
 
     public User getUserById(Long id) {
-        if (!checkIfUserExists(id)) {
-            throw new EntityNotFoundException("User not found with ID: " + id);
-        }
         return userRep.getReferenceById(id);
     }
 
@@ -40,17 +33,11 @@ public class UserService {
     }
 
     public void updateUserById(Long id, User updatedUser) {
-        if (!checkIfUserExists(id)) {
-            throw new EntityNotFoundException("User not found with ID: " + id);
-        }
         updatedUser.setId(id);
         userRep.save(updatedUser);
     }
 
     public void deleteUserById(Long id) {
-        if (!checkIfUserExists(id)) {
-            throw new EntityNotFoundException("User not found with ID: " + id);
-        }
         userRep.deleteById(id);
     }
 }

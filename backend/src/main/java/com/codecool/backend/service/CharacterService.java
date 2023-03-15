@@ -21,18 +21,11 @@ public class CharacterService {
     }
 
 
-    private boolean checkIfCharacterExists(Long id) {
-        return characterRep.existsById(id);
-    }
-
     public List<Character> getAllCharacters() {
         return characterRep.findAll();
     }
 
     public Character getCharacterById(Long id) {
-        if(checkIfCharacterExists(id)) {
-            throw new EntityNotFoundException("Character not found with ID: " + id);
-        }
         return characterRep.getReferenceById(id);
     }
 
@@ -41,17 +34,11 @@ public class CharacterService {
     }
 
     public void updateCharacterById(Long id, Character newCharacter) {
-        if(checkIfCharacterExists(id)) {
-            throw new EntityNotFoundException("Character not found with ID: " + id);
-        }
         newCharacter.setId(id);
         characterRep.save(newCharacter);
     }
 
     public void deleteCharacterById(Long id) {
-        if(checkIfCharacterExists(id)) {
-            throw new EntityNotFoundException("Character not found with ID: " + id);
-        }
         characterRep.deleteById(id);
     }
 }
