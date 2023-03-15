@@ -10,8 +10,11 @@ import SkillsSelector from "./SkillsSelector";
 import RollPopupButton from "./RollPopupButton";
 
 function App() {
+    const [user, setUser] = useState(null);
+    const [userCharacters, setUserCharacters] = useState([]);
+
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
-    const nums = [8, 10, 12, 13, 14, 15];
+    const standardNums = [8, 10, 12, 13, 14, 15];
 
     const [classDetail, setClassDetail] = useState(null);
     const [raceDetail, setRaceDetail] = useState(null);
@@ -54,8 +57,9 @@ function App() {
     const [charBackground, setCharBackground] = useState("");
     const [charAlignment, setCharAlignment] = useState("");
 
+
     useEffect(() => {
-        fetchCharacter();
+        fetchUser();
         fetchDndAPI();
         fetchClassDetail();
         fetchRaceDetail();
@@ -100,9 +104,23 @@ function App() {
         }
     };
 
-    const fetchCharacter = async () => {
+    const fetchUser = async (id = 1) => {
         try {
-            const res = await api.get("/character");
+            const res = await api.get("/users/" + id);
+            setUser(res.data);
+            setUserCharacters(res.data.characters);
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log("ERROR: " + e);
+            }
+        }
+    }
+
+    const fetchCharacter = async (id = 1) => {
+        try {
+            const res = await api.get("/characters/" + id);
             setCharacterStates(res.data);
         } catch (e) {
             if (e.response) {
@@ -147,7 +165,7 @@ function App() {
 
     const setCharacterStates = (character) => {
         setCharName(character.name);
-        setCharClass(character.class);
+        setCharClass(character.charClass);
         setCharSubClass(character.subClass);
         setCharRace(character.race);
         setCharLevel(character.level);
@@ -223,32 +241,33 @@ function App() {
         const newChar = {
             "name": charName,
             "level": charLevel,
-            "class": charClass,
+            "charClass": charClass,
             "subClass": charSubClass,
             "race": charRace,
             "background": charBackground,
             "alignment": charAlignment,
             "stats": {
-                "str": STR,
-                "dex": DEX,
-                "con": CON,
-                "int": INT,
-                "wis": WIS,
-                "cha": CHA,
-            },
-            "skills": ["to be implemented"],
+                STR, DEX, CON,
+                INT, WIS, CHA
+            }
         };
         return newChar;
     };
 
 
     const createCharacter = async () => {
-        const char = buildCharacter();
-        await api.post("/character", char)
+        let newChar = await buildCharacter();
+        // let allChars = [...userCharacters, newChar];
+        // setUserCharacters(allChars);
+        // setUser({...user, characters: allChars});
+        // console.log(updatedUser.characters);
+
+        let updatedUser = {...user, characters: [...userCharacters, newChar]}
+        await api.post("/users/" + user.id, updatedUser);
     }
 
     const updateCharacter = async (id) => {
-        
+
     }
 
     // render
