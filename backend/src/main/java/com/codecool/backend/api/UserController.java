@@ -2,13 +2,13 @@ package com.codecool.backend.api;
 
 import com.codecool.backend.model.User;
 import com.codecool.backend.service.UserService;
-import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/users")
 public class UserController {
     private UserService userService;
