@@ -314,11 +314,18 @@ function App() {
 
                         statsComp={
                             <MethodContext.Provider value={{creationMethod, randomNums}}>
-                                <StatSelector
-                                    stats={stats}
-                                    nums={creationMethod == "standard" ? standardNums : randomNums}
-                                    // handleOptionChange={}
-                                />
+                                {creationMethod == "standard" ?
+                                    <StatSelector
+                                        stats={stats}
+                                        nums={standardNums}
+                                    /> : creationMethod == "random" ?
+                                        <StatSelector
+                                            stats={stats}
+                                            nums={randomNums}
+                                        /> : creationMethod == "point" ?
+                                            <div>Point Buy - Soon</div> :
+                                            <div>Error Component</div>
+                                }
                             </MethodContext.Provider>
                         }
 
