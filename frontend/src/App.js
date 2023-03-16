@@ -24,12 +24,12 @@ function App() {
     const [raceOptions, setRaceOptions] = useState([]);
     const [backgroundOptions, setBackgroundOptions] = useState([]);
 
-    const [STR, setSTR] = useState(10);
-    const [DEX, setDEX] = useState(10);
-    const [CON, setCON] = useState(10);
-    const [INT, setINT] = useState(10);
-    const [WIS, setWIS] = useState(10);
-    const [CHA, setCHA] = useState(10);
+    const [STR, setSTR] = useState(null);
+    const [DEX, setDEX] = useState(null);
+    const [CON, setCON] = useState(null);
+    const [INT, setINT] = useState(null);
+    const [WIS, setWIS] = useState(null);
+    const [CHA, setCHA] = useState(null);
 
     const statStates = [STR, DEX, CON, INT, WIS, CHA];
 
@@ -60,6 +60,8 @@ function App() {
 
     useEffect(() => {
         fetchUser();
+        fetchCharacter();
+
         fetchDndAPI();
         fetchClassDetail();
         fetchRaceDetail();
@@ -164,6 +166,8 @@ function App() {
     };
 
     const setCharacterStates = (character) => {
+        const charStats = character.stats;
+
         setCharName(character.name);
         setCharClass(character.charClass);
         setCharSubClass(character.subClass);
@@ -171,6 +175,15 @@ function App() {
         setCharLevel(character.level);
         setCharBackground(character.background);
         setCharAlignment(character.alignment);
+
+        // setCharSKills
+
+        setSTR(charStats.strength);
+        setDEX(charStats.dexterity);
+        setCON(charStats.constitution);
+        setINT(charStats.intelligence);
+        setWIS(charStats.wisdom);
+        setCHA(charStats.charisma);
     };
 
     const setSavingThrowStates = (savingThrows) => {
