@@ -14,13 +14,18 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CharacterSheet from "./pages/CharacterSheet";
+import {MethodContext} from "./utils/MethodContext";
 
 function App() {
     const [user, setUser] = useState(null);
     const [userCharacters, setUserCharacters] = useState([]);
 
+    // standard, random or point to indicate method and render specific component
+    const [creationMethod, setCreationMethod] = useState(null);
+
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     const standardNums = [8, 10, 12, 13, 14, 15];
+    const [randomNums, setRandomNums] = useState([]);
 
     const [classDetail, setClassDetail] = useState(null);
     const [raceDetail, setRaceDetail] = useState(null);
@@ -276,7 +281,64 @@ function App() {
                     />
                 }
             />}>
-                <Route exact path="/" element={<Home />} />
+                <Route exact path="/" element={<Home
+                    setCreationMethod={setCreationMethod}
+                    setRandomNums={setRandomNums}
+                />} />
+                <Route exact path="/character-creation" element={
+                    <CharacterSheet
+                        basicInfoComp={
+                            <BasicInfoSelector
+                                statStates={statStates}
+                                classOptions={classOptions}
+                                classDetail={classDetail}
+                                alignmentOptions={alignmentOptions}
+                                raceOptions={raceOptions}
+                                backgroundOptions={backgroundOptions}
+                                charName={charName}
+                                charClass={charClass}
+                                charSubClass={charSubClass}
+                                charRace={charRace}
+                                charLevel={charLevel}
+                                charBackground={charBackground}
+                                charAlignment={charAlignment}
+
+                                setCharName={setCharName}
+                                setCharLevel={setCharLevel}
+                                setCharClass={setCharClass}
+                                setCharRace={setCharRace}
+                                setCharAlignment={setCharAlignment}
+                                setCharBackground={setCharBackground}
+                            />
+                        }
+
+                        statsComp={
+                            <MethodContext.Provider value={{creationMethod, randomNums}}>
+                                <StatSelector
+                                    stats={stats}
+                                    nums={creationMethod == "standard" ? standardNums : randomNums}
+                                    // handleOptionChange={}
+                                />
+                            </MethodContext.Provider>
+                        }
+
+                        savingThrowComp={
+                            <SavingThrowSelector
+                                stats={stats}
+                                statStates={statStates}
+                                savingThrowStates={savingThrowStates}
+                                charLevel={charLevel}
+                            />
+                        }
+                        skillsComp={
+                            <SkillsSelector
+                                stats={stats}
+                                statStates={statStates}
+                                classDetail={classDetail}
+                                raceDetail={raceDetail}
+                            />
+                        }
+                    /> } />
                 <Route path="/character-sheet" element={
                     <CharacterSheet
                         basicInfoComp={
