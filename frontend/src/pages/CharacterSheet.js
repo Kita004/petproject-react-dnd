@@ -1,10 +1,18 @@
 import React from "react";
 
-const CharacterSheet = () => {
-    return <div>
-        <h1>
-            This is The Character Sheet
-        </h1>
+const CharacterSheet = ({basicInfoComp, statsComp, savingThrowComp, skillsComp}) => {
+    return <div className="character-sheet">
+        <div className="container">
+            <div>
+                {basicInfoComp}
+                <h2>Attributes</h2>
+                <div id="attributesContainer" className="container attributes">
+                    {statsComp}
+                    {savingThrowComp}
+                </div>
+            </div>
+            {skillsComp}
+        </div>
     </div>
 }
 

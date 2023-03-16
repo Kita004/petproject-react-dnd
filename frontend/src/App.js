@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "./utils/api";
 
 import StatSelector from "./StatSelector";
@@ -8,6 +8,12 @@ import SavingThrowSelector from "./SavingThrowSelector";
 import Header from "./Header";
 import SkillsSelector from "./SkillsSelector";
 import RollPopupButton from "./RollPopupButton";
+import {Route, Routes} from "react-router-dom";
+import Layout from "./pages/Layout";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import CharacterSheet from "./pages/CharacterSheet";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -258,73 +264,64 @@ function App() {
 
 
     // render
-    return (
-        <div className="App">
-            <Header
-                user={user}
-                userCharacters={userCharacters}
-                buildCharacter={buildCharacter}
-                setCharacterStates={setCharacterStates}
-            />
-            <div className="container">
-                <div>
-                    <BasicInfoSelector
-                        statStates={statStates}
-                        classOptions={classOptions}
-                        classDetail={classDetail}
-                        alignmentOptions={alignmentOptions}
-                        raceOptions={raceOptions}
-                        backgroundOptions={backgroundOptions}
-                        charName={charName}
-                        charClass={charClass}
-                        charSubClass={charSubClass}
-                        charRace={charRace}
-                        charLevel={charLevel}
-                        charBackground={charBackground}
-                        charAlignment={charAlignment}
+    return(
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/character-sheet" element={
+                    <CharacterSheet
+                        basicInfoComp={
+                            <BasicInfoSelector
+                                statStates={statStates}
+                                classOptions={classOptions}
+                                classDetail={classDetail}
+                                alignmentOptions={alignmentOptions}
+                                raceOptions={raceOptions}
+                                backgroundOptions={backgroundOptions}
+                                charName={charName}
+                                charClass={charClass}
+                                charSubClass={charSubClass}
+                                charRace={charRace}
+                                charLevel={charLevel}
+                                charBackground={charBackground}
+                                charAlignment={charAlignment}
 
-                        setCharName={setCharName}
-                        setCharLevel={setCharLevel}
-                        setCharClass={setCharClass}
-                        setCharRace={setCharRace}
-                        setCharAlignment={setCharAlignment}
-                        setCharBackground={setCharBackground}
-                    />
-                    <h2>Attributes</h2>
-                    <div
-                        id="attributesContainer"
-                        className="container attributes"
-                    >
-                        <StatContainer
-                            stats={stats}
-                            statStates={statStates}
-                            changeState={changeState}
-                        />
-                        <SavingThrowSelector
-                            stats={stats}
-                            statStates={statStates}
-                            savingThrowStates={savingThrowStates}
-                            charLevel={charLevel}
-                        />
-                    </div>
-                </div>
-                <SkillsSelector
-                    stats={stats}
-                    statStates={statStates}
-                    classDetail={classDetail}
-                    raceDetail={raceDetail}
-                />
-            </div>
-            {/*<div>*/}
-            {/*    <h2>Dice Roller</h2>*/}
-            {/*    <RollPopupButton*/}
-
-            {/*    />*/}
-            {/*    <button>2</button>*/}
-            {/*    <button>3</button>*/}
-            {/*</div>*/}
-        </div>
-    );
+                                setCharName={setCharName}
+                                setCharLevel={setCharLevel}
+                                setCharClass={setCharClass}
+                                setCharRace={setCharRace}
+                                setCharAlignment={setCharAlignment}
+                                setCharBackground={setCharBackground}
+                            />
+                        }
+                        statsComp={
+                            <StatContainer
+                                stats={stats}
+                                statStates={statStates}
+                                changeState={changeState}
+                            />
+                        }
+                        savingThrowComp={
+                            <SavingThrowSelector
+                                stats={stats}
+                                statStates={statStates}
+                                savingThrowStates={savingThrowStates}
+                                charLevel={charLevel}
+                            />
+                        }
+                        skillsComp={
+                            <SkillsSelector
+                                stats={stats}
+                                statStates={statStates}
+                                classDetail={classDetail}
+                                raceDetail={raceDetail}
+                            />
+                        }
+                    /> } />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />}/>
+            </Route>
+        </Routes>);
 }
 
 export default App;
