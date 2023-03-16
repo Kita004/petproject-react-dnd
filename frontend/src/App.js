@@ -49,6 +49,7 @@ function App() {
         CHAsaving,
     ];
 
+    const [charId, setCharId] = useState(null);
     const [charName, setCharName] = useState("");
     const [charLevel, setCharLevel] = useState(1);
     const [charClass, setCharClass] = useState("");
@@ -60,7 +61,6 @@ function App() {
 
     useEffect(() => {
         fetchUser();
-        fetchCharacter();
 
         fetchDndAPI();
         fetchClassDetail();
@@ -120,19 +120,6 @@ function App() {
         }
     }
 
-    const fetchCharacter = async (id = 1) => {
-        try {
-            const res = await api.get("/characters/" + id);
-            setCharacterStates(res.data);
-        } catch (e) {
-            if (e.response) {
-                console.log(e.response.data);
-            } else {
-                console.log("ERROR: " + e);
-            }
-        }
-    };
-
     const fetchDndAPI = async () => {
         try {
             // fetch classes for Class Select
@@ -165,9 +152,10 @@ function App() {
         }
     };
 
-    const setCharacterStates = (character) => {
+    const setCharacterStates = (character = null) => {
         const charStats = character.stats;
 
+        setCharId(character.id);
         setCharName(character.name);
         setCharClass(character.charClass);
         setCharSubClass(character.subClass);
@@ -268,26 +256,15 @@ function App() {
     };
 
 
-    const createCharacter = async () => {
-        let newChar = await buildCharacter();
-        // let allChars = [...userCharacters, newChar];
-        // setUserCharacters(allChars);
-        // setUser({...user, characters: allChars});
-        // console.log(updatedUser.characters);
-
-        let updatedUser = {...user, characters: [...userCharacters, newChar]}
-        await api.post("/users/" + user.id, updatedUser);
-    }
-
-    const updateCharacter = async (id) => {
-
-    }
 
     // render
     return (
         <div className="App">
             <Header
-            createCharacter={createCharacter}
+                user={user}
+                userCharacters={userCharacters}
+                buildCharacter={buildCharacter}
+                setCharacterStates={setCharacterStates}
             />
             <div className="container">
                 <div>
