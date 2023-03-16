@@ -266,7 +266,16 @@ function App() {
     // render
     return(
         <Routes>
-            <Route path="/" element={<Layout/>}>
+            <Route path="/" element={<Layout
+                header={
+                    <Header
+                        user={user}
+                        userCharacters={userCharacters}
+                        buildCharacter={buildCharacter}
+                        setCharacterStates={setCharacterStates}
+                    />
+                }
+            />}>
                 <Route exact path="/" element={<Home />} />
                 <Route path="/character-sheet" element={
                     <CharacterSheet

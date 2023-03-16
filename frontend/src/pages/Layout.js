@@ -1,11 +1,10 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
 
-const Layout = () => {
-    return <div>
-        <h1>Header Goes here</h1>
+const Layout = ({header}) => {
+    return <div className="App">
+        {header}
         <Outlet />
-        <h1>Footer Here?</h1>
     </div>
 }
 
