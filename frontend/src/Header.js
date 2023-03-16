@@ -1,15 +1,15 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({createCharacter}) => {
     return <header>
-        <button>Home?</button>
+        <button disabled>Home?</button>
         <div className="CRUD">
-            <button>New</button>
-            <button>Load</button>
-            <button>Save/Edit</button>
-            <button>Delete</button>
+            <button onClick={() => createCharacter()}>New</button>
+            <button disabled>Load</button>
+            <button disabled>Save/Edit</button>
+            <button disabled>Delete</button>
         </div>
-        <button>Login/Logout</button>
+        <button disabled>Login/Logout</button>
     </header>
 }
 
