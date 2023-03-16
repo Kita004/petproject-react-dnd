@@ -28,7 +28,7 @@ public class UserService {
         return userRep.getReferenceById(id);
     }
 
-    public User createUser(User user) {
+    public User addUser(User user) {
         return userRep.save(user);
     }
 

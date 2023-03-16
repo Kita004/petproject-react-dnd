@@ -51,6 +51,6 @@ public class DnDCharacterSheetApplication implements CommandLineRunner {
 
 		user1.setCharacters(Set.of(char1));
 
-		userService.createUser(user1);
+		userService.addUser(user1);
 	}
 }
