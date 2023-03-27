@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "./utils/api";
 
 import StatSelector from "./StatSelector";
@@ -8,13 +8,24 @@ import SavingThrowSelector from "./SavingThrowSelector";
 import Header from "./Header";
 import SkillsSelector from "./SkillsSelector";
 import RollPopupButton from "./RollPopupButton";
+import {Route, Routes} from "react-router-dom";
+import Layout from "./pages/Layout";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import CharacterSheet from "./pages/CharacterSheet";
+import {MethodContext} from "./utils/MethodContext";
 
 function App() {
     const [user, setUser] = useState(null);
     const [userCharacters, setUserCharacters] = useState([]);
 
+    // standard, random or point to indicate method and render specific component
+    const [creationMethod, setCreationMethod] = useState(null);
+
     const stats = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     const standardNums = [8, 10, 12, 13, 14, 15];
+    const [randomNums, setRandomNums] = useState([]);
 
     const [classDetail, setClassDetail] = useState(null);
     const [raceDetail, setRaceDetail] = useState(null);
@@ -49,6 +60,7 @@ function App() {
         CHAsaving,
     ];
 
+    const [charId, setCharId] = useState(null);
     const [charName, setCharName] = useState("");
     const [charLevel, setCharLevel] = useState(1);
     const [charClass, setCharClass] = useState("");
@@ -59,8 +71,7 @@ function App() {
 
 
     useEffect(() => {
-        fetchUser();
-        fetchCharacter();
+        // fetchUser();
 
         fetchDndAPI();
         fetchClassDetail();
@@ -106,32 +117,19 @@ function App() {
         }
     };
 
-    const fetchUser = async (id = 1) => {
-        try {
-            const res = await api.get("/users/" + id);
-            setUser(res.data);
-            setUserCharacters(res.data.characters);
-        } catch (e) {
-            if (e.response) {
-                console.log(e.response.data);
-            } else {
-                console.log("ERROR: " + e);
-            }
-        }
-    }
-
-    const fetchCharacter = async (id = 1) => {
-        try {
-            const res = await api.get("/characters/" + id);
-            setCharacterStates(res.data);
-        } catch (e) {
-            if (e.response) {
-                console.log(e.response.data);
-            } else {
-                console.log("ERROR: " + e);
-            }
-        }
-    };
+    // const fetchUser = async (id = 1) => {
+    //     try {
+    //         const res = await api.get("/users/" + id);
+    //         setUser(res.data);
+    //         setUserCharacters(res.data.characters);
+    //     } catch (e) {
+    //         if (e.response) {
+    //             console.log(e.response.data);
+    //         } else {
+    //             console.log("ERROR: " + e);
+    //         }
+    //     }
+    // }
 
     const fetchDndAPI = async () => {
         try {
@@ -165,25 +163,49 @@ function App() {
         }
     };
 
-    const setCharacterStates = (character) => {
-        const charStats = character.stats;
+    const setCharacterStates = (character = null) => {
+        // TODO: please refactor this, make character an object? use Array?
 
-        setCharName(character.name);
-        setCharClass(character.charClass);
-        setCharSubClass(character.subClass);
-        setCharRace(character.race);
-        setCharLevel(character.level);
-        setCharBackground(character.background);
-        setCharAlignment(character.alignment);
+        if (character) {
+            const charStats = character.stats;
 
-        // setCharSKills
+            setCharId(character.id);
+            setCharName(character.name);
+            setCharClass(character.charClass);
+            setCharSubClass(character.subClass);
+            setCharRace(character.race);
+            setCharLevel(character.level);
+            setCharBackground(character.background);
+            setCharAlignment(character.alignment);
 
-        setSTR(charStats.strength);
-        setDEX(charStats.dexterity);
-        setCON(charStats.constitution);
-        setINT(charStats.intelligence);
-        setWIS(charStats.wisdom);
-        setCHA(charStats.charisma);
+            // setCharSKills
+
+            setSTR(charStats.strength);
+            setDEX(charStats.dexterity);
+            setCON(charStats.constitution);
+            setINT(charStats.intelligence);
+            setWIS(charStats.wisdom);
+            setCHA(charStats.charisma);
+        } else {
+            setCharId(null);
+            setCharName(null);
+            setCharClass(null);
+            setCharSubClass(null);
+            setCharRace(null);
+            setCharLevel(null);
+            setCharBackground(null);
+            setCharAlignment(null);
+
+            // setCharSKills
+
+            setSTR(null);
+            setDEX(null);
+            setCON(null);
+            setINT(null);
+            setWIS(null);
+            setCHA(null);
+        }
+
     };
 
     const setSavingThrowStates = (savingThrows) => {
@@ -268,86 +290,144 @@ function App() {
     };
 
 
-    const createCharacter = async () => {
-        let newChar = await buildCharacter();
-        // let allChars = [...userCharacters, newChar];
-        // setUserCharacters(allChars);
-        // setUser({...user, characters: allChars});
-        // console.log(updatedUser.characters);
-
-        let updatedUser = {...user, characters: [...userCharacters, newChar]}
-        await api.post("/users/" + user.id, updatedUser);
-    }
-
-    const updateCharacter = async (id) => {
-
-    }
 
     // render
-    return (
-        <div className="App">
-            <Header
-            createCharacter={createCharacter}
-            />
-            <div className="container">
-                <div>
-                    <BasicInfoSelector
-                        statStates={statStates}
-                        classOptions={classOptions}
-                        classDetail={classDetail}
-                        alignmentOptions={alignmentOptions}
-                        raceOptions={raceOptions}
-                        backgroundOptions={backgroundOptions}
-                        charName={charName}
-                        charClass={charClass}
-                        charSubClass={charSubClass}
-                        charRace={charRace}
-                        charLevel={charLevel}
-                        charBackground={charBackground}
-                        charAlignment={charAlignment}
+    return(
+        <Routes>
+            <Route path="/" element={<Layout
+                header={
+                    <Header
+                        user={user}
+                        setUser={setUser}
 
-                        setCharName={setCharName}
-                        setCharLevel={setCharLevel}
-                        setCharClass={setCharClass}
-                        setCharRace={setCharRace}
-                        setCharAlignment={setCharAlignment}
-                        setCharBackground={setCharBackground}
+                        userCharacters={userCharacters}
+                        setUserCharacters={setUserCharacters}
+
+                        buildCharacter={buildCharacter}
+                        setCharacterStates={setCharacterStates}
                     />
-                    <h2>Attributes</h2>
-                    <div
-                        id="attributesContainer"
-                        className="container attributes"
-                    >
-                        <StatContainer
-                            stats={stats}
-                            statStates={statStates}
-                            changeState={changeState}
-                        />
-                        <SavingThrowSelector
-                            stats={stats}
-                            statStates={statStates}
-                            savingThrowStates={savingThrowStates}
-                            charLevel={charLevel}
-                        />
-                    </div>
-                </div>
-                <SkillsSelector
-                    stats={stats}
-                    statStates={statStates}
-                    classDetail={classDetail}
-                    raceDetail={raceDetail}
-                />
-            </div>
-            {/*<div>*/}
-            {/*    <h2>Dice Roller</h2>*/}
-            {/*    <RollPopupButton*/}
+                }
+            />}>
+                <Route exact path="/" element={<Home
+                    user={user}
+                    setCreationMethod={setCreationMethod}
+                    setRandomNums={setRandomNums}
+                />} />
+                <Route exact path="/character-creation" element={
+                    <CharacterSheet
+                        basicInfoComp={
+                            <BasicInfoSelector
+                                statStates={statStates}
+                                classOptions={classOptions}
+                                classDetail={classDetail}
+                                alignmentOptions={alignmentOptions}
+                                raceOptions={raceOptions}
+                                backgroundOptions={backgroundOptions}
+                                charName={charName}
+                                charClass={charClass}
+                                charSubClass={charSubClass}
+                                charRace={charRace}
+                                charLevel={charLevel}
+                                charBackground={charBackground}
+                                charAlignment={charAlignment}
 
-            {/*    />*/}
-            {/*    <button>2</button>*/}
-            {/*    <button>3</button>*/}
-            {/*</div>*/}
-        </div>
-    );
+                                setCharName={setCharName}
+                                setCharLevel={setCharLevel}
+                                setCharClass={setCharClass}
+                                setCharRace={setCharRace}
+                                setCharAlignment={setCharAlignment}
+                                setCharBackground={setCharBackground}
+                            />
+                        }
+
+                        statsComp={
+                            <MethodContext.Provider value={{creationMethod, randomNums}}>
+                                {creationMethod == "standard" ?
+                                    <StatSelector
+                                        stats={stats}
+                                        nums={standardNums}
+                                    /> : creationMethod == "random" ?
+                                        <StatSelector
+                                            stats={stats}
+                                            nums={randomNums}
+                                        /> : creationMethod == "point" ?
+                                            <div>Point Buy - Soon</div> :
+                                            <div>Error Component</div>
+                                }
+                            </MethodContext.Provider>
+                        }
+
+                        savingThrowComp={
+                            <SavingThrowSelector
+                                stats={stats}
+                                statStates={statStates}
+                                savingThrowStates={savingThrowStates}
+                                charLevel={charLevel}
+                            />
+                        }
+                        skillsComp={
+                            <SkillsSelector
+                                stats={stats}
+                                statStates={statStates}
+                                classDetail={classDetail}
+                                raceDetail={raceDetail}
+                            />
+                        }
+                    /> } />
+                <Route path="/character-sheet" element={
+                    <CharacterSheet
+                        basicInfoComp={
+                            <BasicInfoSelector
+                                statStates={statStates}
+                                classOptions={classOptions}
+                                classDetail={classDetail}
+                                alignmentOptions={alignmentOptions}
+                                raceOptions={raceOptions}
+                                backgroundOptions={backgroundOptions}
+                                charName={charName}
+                                charClass={charClass}
+                                charSubClass={charSubClass}
+                                charRace={charRace}
+                                charLevel={charLevel}
+                                charBackground={charBackground}
+                                charAlignment={charAlignment}
+
+                                setCharName={setCharName}
+                                setCharLevel={setCharLevel}
+                                setCharClass={setCharClass}
+                                setCharRace={setCharRace}
+                                setCharAlignment={setCharAlignment}
+                                setCharBackground={setCharBackground}
+                            />
+                        }
+                        statsComp={
+                            <StatContainer
+                                stats={stats}
+                                statStates={statStates}
+                                changeState={changeState}
+                            />
+                        }
+                        savingThrowComp={
+                            <SavingThrowSelector
+                                stats={stats}
+                                statStates={statStates}
+                                savingThrowStates={savingThrowStates}
+                                charLevel={charLevel}
+                            />
+                        }
+                        skillsComp={
+                            <SkillsSelector
+                                stats={stats}
+                                statStates={statStates}
+                                classDetail={classDetail}
+                                raceDetail={raceDetail}
+                            />
+                        }
+                    /> } />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />}/>
+            </Route>
+        </Routes>);
 }
 
 export default App;

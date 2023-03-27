@@ -1,15 +1,61 @@
 import React from "react";
+import api from "./utils/api";
+import {useNavigate} from "react-router-dom";
 
-const Header = ({createCharacter}) => {
+const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacter, setCharacterStates}) => {
+    const nav = useNavigate();
+
+    const fetchUser = async (id = 1) => {
+        try {
+            const res = await api.get("/users/" + id);
+            setUser(res.data);
+            setUserCharacters(res.data.characters);
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log("ERROR: " + e);
+            }
+        }
+    }
+
+    const saveCharacter = async () => {
+        const newChar = await buildCharacter();
+
+        let updatedUser = {...user, characters: [...userCharacters, newChar]}
+        await api.put("/users/" + user.id, updatedUser);
+    }
+
+    const loadCharacter = async (id = 1) => {
+        try {
+            const res = await api.get("/characters/" + id);
+            setCharacterStates(res.data);
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log("ERROR: " + e);
+            }
+        }
+    };
+
+    const deleteCharacter = async (id = 2) => {
+       await api.delete("/characters/" + id)
+    }
+
+
     return <header>
-        <button disabled>Home?</button>
+        <button onClick={() => nav("/")}>Home</button>
         <div className="CRUD">
-            <button onClick={() => createCharacter()}>New</button>
-            <button disabled>Load</button>
-            <button disabled>Save/Edit</button>
-            <button disabled>Delete</button>
+            <button disabled /* trigger menu for choosing method */>Create</button>
+            <button disabled={!user} onClick={() => loadCharacter().then(() => nav("/character-sheet"))}>Load</button>
+            <button disabled={!user} onClick={() => saveCharacter()}>Save</button>
+            <button disabled={!user} onClick={() => deleteCharacter()}>Delete</button>
         </div>
-        <button disabled>Login/Logout</button>
+        {user ?
+            <button onClick={() => {setUser(null); setCharacterStates(); nav("/")}}>Logout</button> :
+            <button onClick={() => fetchUser()}>Login</button>
+        }
     </header>
 }
 

@@ -24,6 +24,10 @@ Header {
   justify-content: space-between;
 }
 
+.home {
+  text-align-last: center;
+}
+
 select:disabled, input:disabled {
   background: transparent;
   border: none;
