@@ -305,6 +305,7 @@ function App() {
                     setUserCharacters={setUserCharacters}
                 />} />
                 <Route path="/method-menu" element={<MethodMenu
+                    setCharacterStates={setCharacterStates}
                     setCreationMethod={setCreationMethod}
                     setRandomNums={setRandomNums}
                 />} />
