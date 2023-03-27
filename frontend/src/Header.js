@@ -7,7 +7,7 @@ const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacte
 
     const fetchUser = async (id = 1) => {
         try {
-            const res = await api.get("/users/" + id);
+            const res = await api.get("/api/users/" + id);
             setUser(res.data);
             setUserCharacters(res.data.characters);
         } catch (e) {
@@ -23,12 +23,12 @@ const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacte
         const newChar = await buildCharacter();
 
         let updatedUser = {...user, characters: [...userCharacters, newChar]}
-        await api.put("/users/" + user.id, updatedUser);
+        await api.put("/api/users/" + user.id, updatedUser);
     }
 
     const loadCharacter = async (id = 1) => {
         try {
-            const res = await api.get("/characters/" + id);
+            const res = await api.get("/api/characters/" + id);
             setCharacterStates(res.data);
         } catch (e) {
             if (e.response) {
@@ -40,7 +40,7 @@ const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacte
     };
 
     const deleteCharacter = async (id = 2) => {
-       await api.delete("/characters/" + id)
+       await api.delete("/api/characters/" + id)
     }
 
 
