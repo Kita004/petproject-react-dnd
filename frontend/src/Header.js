@@ -43,6 +43,11 @@ const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacte
        await api.delete("/api/characters/" + id)
     }
 
+    const logoutUser = () => {
+        setUser(null);
+        setCharacterStates();
+        nav("/");
+    }
 
     return <header>
         <button onClick={() => nav("/")}>Home</button>
@@ -53,8 +58,8 @@ const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacte
             <button disabled={!user} onClick={() => deleteCharacter()}>Delete</button>
         </div>
         {user ?
-            <button onClick={() => {setUser(null); setCharacterStates(); nav("/")}}>Logout</button> :
-            <button onClick={() => fetchUser()}>Login</button>
+            <button onClick={() => logoutUser()}>Logout</button> :
+            <button onClick={() => /*fetchUser()*/ nav("/login")}>Login</button>
         }
     </header>
 }
