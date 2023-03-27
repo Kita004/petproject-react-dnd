@@ -118,20 +118,6 @@ function App() {
         }
     };
 
-    // const fetchUser = async (id = 1) => {
-    //     try {
-    //         const res = await api.get("/users/" + id);
-    //         setUser(res.data);
-    //         setUserCharacters(res.data.characters);
-    //     } catch (e) {
-    //         if (e.response) {
-    //             console.log(e.response.data);
-    //         } else {
-    //             console.log("ERROR: " + e);
-    //         }
-    //     }
-    // }
-
     const fetchDndAPI = async () => {
         try {
             // fetch classes for Class Select
