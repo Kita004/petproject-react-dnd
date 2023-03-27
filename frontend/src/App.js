@@ -300,6 +300,10 @@ function App() {
                     setCreationMethod={setCreationMethod}
                     setRandomNums={setRandomNums}
                 />} />
+                <Route path="/login" element={<Login
+                    setUser={setUser}
+                    setUserCharacters={setUserCharacters}
+                />} />
                 <Route path="/method-menu" element={<MethodMenu
                     setCreationMethod={setCreationMethod}
                     setRandomNums={setRandomNums}
