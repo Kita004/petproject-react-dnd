@@ -18,6 +18,7 @@ import {MethodContext} from "./utils/MethodContext";
 import MethodMenu from "./pages/MethodMenu";
 
 function App() {
+    // TODO: create UserContext
     const [user, setUser] = useState(null);
     const [userCharacters, setUserCharacters] = useState([]);
 
