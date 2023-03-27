@@ -47,7 +47,7 @@ const Header = ({user, setUser, userCharacters, setUserCharacters, buildCharacte
     return <header>
         <button onClick={() => nav("/")}>Home</button>
         <div className="CRUD">
-            <button disabled /* trigger menu for choosing method */>Create</button>
+            <button disabled={!user} onClick={() => nav("/method-menu")}>Create</button>
             <button disabled={!user} onClick={() => loadCharacter().then(() => nav("/character-sheet"))}>Load</button>
             <button disabled={!user} onClick={() => saveCharacter()}>Save</button>
             <button disabled={!user} onClick={() => deleteCharacter()}>Delete</button>

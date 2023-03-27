@@ -1,18 +1,15 @@
 import React from "react";
-import * as formulas from "../utils/formulas";
-import {useNavigate} from "react-router-dom";
+import MethodMenu from "./MethodMenu";
 
 const Home = ({user, setCreationMethod, setRandomNums}) => {
-    const nav = useNavigate();
-
-    return <div className="home">
+    return <div id="home-page" className="main-content">
         <h1>Welcome to the Homepage!</h1>
-        {user ? <div>
-            <h2>Create a Character!</h2>
-            <button onClick={() => {setCreationMethod("standard"); nav("/character-creation")}}>Standard Array</button>
-            <button onClick={() => {setCreationMethod("random"); setRandomNums(formulas.rollRandomStats());nav("/character-creation")}}>Random Rolls</button>
-            <button disabled onClick={() => {setCreationMethod("point"); nav("/character-creation")}}>Point Buy</button>
-        </div> :
+        {user ?
+            <MethodMenu
+                setCreationMethod={setCreationMethod}
+                setRandomNums={setRandomNums}
+            />
+         :
             <div>
             <h2>Register!</h2>
             <button disabled>Let' Go!</button>

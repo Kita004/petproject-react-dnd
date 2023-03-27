@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CharacterSheet from "./pages/CharacterSheet";
 import {MethodContext} from "./utils/MethodContext";
+import MethodMenu from "./pages/MethodMenu";
 
 function App() {
     const [user, setUser] = useState(null);
@@ -310,6 +311,10 @@ function App() {
             />}>
                 <Route exact path="/" element={<Home
                     user={user}
+                    setCreationMethod={setCreationMethod}
+                    setRandomNums={setRandomNums}
+                />} />
+                <Route path="/method-menu" element={<MethodMenu
                     setCreationMethod={setCreationMethod}
                     setRandomNums={setRandomNums}
                 />} />
