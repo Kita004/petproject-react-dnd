@@ -32,7 +32,6 @@ public class DnDCharacterSheetApplication implements CommandLineRunner {
 		user1.setName("TestUser");
 
 		Stats stats1 = new Stats();
-//		stats1.setId(1L);
 		stats1.setStrength(8);
 		stats1.setDexterity(10);
 		stats1.setConstitution(12);
@@ -41,7 +40,6 @@ public class DnDCharacterSheetApplication implements CommandLineRunner {
 		stats1.setCharisma(15);
 
 		Character char1 = new Character();
-		char1.setId(1L);
 		char1.setName("Cody the Cool");
 		char1.setLevel(20);
 		char1.setCharClass("wizard");
@@ -51,7 +49,6 @@ public class DnDCharacterSheetApplication implements CommandLineRunner {
 		char1.setStats(stats1);
 
 		Stats stats2 = new Stats();
-//		stats2.setId(2L);
 		stats2.setStrength(20);
 		stats2.setDexterity(20);
 		stats2.setConstitution(20);
@@ -60,9 +57,8 @@ public class DnDCharacterSheetApplication implements CommandLineRunner {
 		stats2.setCharisma(20);
 
 		Character char2 = new Character();
-		char2.setId(2L);
 		char2.setName("Test Dude");
-		char2.setLevel(1);
+		char2.setLevel(20);
 		char2.setCharClass("barbarian");
 		char2.setRace("dragonborn");
 		char2.setBackground("acolyte");
