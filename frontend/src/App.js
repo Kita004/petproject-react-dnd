@@ -71,7 +71,7 @@ function App() {
 
 
     useEffect(() => {
-        fetchUser();
+        // fetchUser();
 
         fetchDndAPI();
         fetchClassDetail();
@@ -117,19 +117,19 @@ function App() {
         }
     };
 
-    const fetchUser = async (id = 1) => {
-        try {
-            const res = await api.get("/users/" + id);
-            setUser(res.data);
-            setUserCharacters(res.data.characters);
-        } catch (e) {
-            if (e.response) {
-                console.log(e.response.data);
-            } else {
-                console.log("ERROR: " + e);
-            }
-        }
-    }
+    // const fetchUser = async (id = 1) => {
+    //     try {
+    //         const res = await api.get("/users/" + id);
+    //         setUser(res.data);
+    //         setUserCharacters(res.data.characters);
+    //     } catch (e) {
+    //         if (e.response) {
+    //             console.log(e.response.data);
+    //         } else {
+    //             console.log("ERROR: " + e);
+    //         }
+    //     }
+    // }
 
     const fetchDndAPI = async () => {
         try {
@@ -164,25 +164,48 @@ function App() {
     };
 
     const setCharacterStates = (character = null) => {
-        const charStats = character.stats;
+        // TODO: please refactor this, make character an object? use Array?
 
-        setCharId(character.id);
-        setCharName(character.name);
-        setCharClass(character.charClass);
-        setCharSubClass(character.subClass);
-        setCharRace(character.race);
-        setCharLevel(character.level);
-        setCharBackground(character.background);
-        setCharAlignment(character.alignment);
+        if (character) {
+            const charStats = character.stats;
 
-        // setCharSKills
+            setCharId(character.id);
+            setCharName(character.name);
+            setCharClass(character.charClass);
+            setCharSubClass(character.subClass);
+            setCharRace(character.race);
+            setCharLevel(character.level);
+            setCharBackground(character.background);
+            setCharAlignment(character.alignment);
 
-        setSTR(charStats.strength);
-        setDEX(charStats.dexterity);
-        setCON(charStats.constitution);
-        setINT(charStats.intelligence);
-        setWIS(charStats.wisdom);
-        setCHA(charStats.charisma);
+            // setCharSKills
+
+            setSTR(charStats.strength);
+            setDEX(charStats.dexterity);
+            setCON(charStats.constitution);
+            setINT(charStats.intelligence);
+            setWIS(charStats.wisdom);
+            setCHA(charStats.charisma);
+        } else {
+            setCharId(null);
+            setCharName(null);
+            setCharClass(null);
+            setCharSubClass(null);
+            setCharRace(null);
+            setCharLevel(null);
+            setCharBackground(null);
+            setCharAlignment(null);
+
+            // setCharSKills
+
+            setSTR(null);
+            setDEX(null);
+            setCON(null);
+            setINT(null);
+            setWIS(null);
+            setCHA(null);
+        }
+
     };
 
     const setSavingThrowStates = (savingThrows) => {
@@ -275,13 +298,18 @@ function App() {
                 header={
                     <Header
                         user={user}
+                        setUser={setUser}
+
                         userCharacters={userCharacters}
+                        setUserCharacters={setUserCharacters}
+
                         buildCharacter={buildCharacter}
                         setCharacterStates={setCharacterStates}
                     />
                 }
             />}>
                 <Route exact path="/" element={<Home
+                    user={user}
                     setCreationMethod={setCreationMethod}
                     setRandomNums={setRandomNums}
                 />} />

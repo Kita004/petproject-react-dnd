@@ -2,7 +2,6 @@ import React from "react";
 
 const StatSelector = ({stats, nums, handleOptionChange}) => {
     return <div id="statSelector">
-        <h2>Stats</h2>
         <table id="statSelectorTable" className="characterTable">
             <tbody>
             {stats.map(stat => {
