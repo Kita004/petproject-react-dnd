@@ -22,6 +22,6 @@ public class User {
 
     @OneToMany
     @JoinColumn(name = "character_id")
-    @Cascade({CascadeType.PERSIST, CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @Cascade({CascadeType.ALL})
     private Set<Character> characters;
 }

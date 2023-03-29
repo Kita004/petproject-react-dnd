@@ -28,7 +28,7 @@ public class Character {
 
     @OneToOne
     @JoinColumn(name = "stats_id")
-    @Cascade({CascadeType.PERSIST, CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @Cascade(CascadeType.ALL)
     // TODO: make it individual Fields?
     private Stats stats;
 
