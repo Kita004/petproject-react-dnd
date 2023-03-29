@@ -16,11 +16,12 @@ import Login from "./pages/Login";
 import CharacterSheet from "./pages/CharacterSheet";
 import {MethodContext} from "./utils/MethodContext";
 import MethodMenu from "./pages/MethodMenu";
+import {useLocalState} from "./utils/useLocalStorage";
 
 function App() {
     // TODO: create UserContext
-    const [user, setUser] = useState(null);
-    const [userCharacters, setUserCharacters] = useState([]);
+    const [user, setUser] = useState(localStorage.getItem('user'));
+    const [userCharacters, setUserCharacters] = useState(null);
 
     // standard, random or point to indicate method and render specific component
     const [creationMethod, setCreationMethod] = useState(null);
@@ -73,11 +74,7 @@ function App() {
 
 
     useEffect(() => {
-        // fetchUser();
-
         fetchDndAPI();
-        fetchClassDetail();
-        fetchRaceDetail();
     }, []);
 
     useEffect(() => {
@@ -90,11 +87,13 @@ function App() {
 
     const fetchClassDetail = async () => {
         try {
-            const resClassDetail = await api.get(
-                "https://www.dnd5eapi.co/api/classes/" + charClass
-            );
-            setClassDetail(resClassDetail.data);
-            setSavingThrowStates(resClassDetail.data.saving_throws);
+            if (charClass) {
+                const resClassDetail = await api.get(
+                    "https://www.dnd5eapi.co/api/classes/" + charClass
+                );
+                setClassDetail(resClassDetail.data);
+                setSavingThrowStates(resClassDetail.data.saving_throws);
+            }
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data);
@@ -151,6 +150,7 @@ function App() {
         }
     };
 
+
     const setCharacterStates = (character = null) => {
         // TODO: please refactor this, make character an object? use Array?
 
@@ -180,7 +180,7 @@ function App() {
             setCharClass(null);
             setCharSubClass(null);
             setCharRace(null);
-            setCharLevel(null);
+            setCharLevel(1);
             setCharBackground(null);
             setCharAlignment(null);
 
@@ -192,6 +192,9 @@ function App() {
             setINT(null);
             setWIS(null);
             setCHA(null);
+
+            // setSavingThrows
+            setSavingThrowStates([]);
         }
 
     };
@@ -288,6 +291,8 @@ function App() {
                         user={user}
                         setUser={setUser}
 
+                        charId={charId}
+
                         userCharacters={userCharacters}
                         setUserCharacters={setUserCharacters}
 
@@ -298,6 +303,9 @@ function App() {
             />}>
                 <Route exact path="/" element={<Home
                     user={user}
+                    userCharacters={userCharacters}
+                    setUserCharacters={setUserCharacters}
+                    setCharacterStates={setCharacterStates}
                     setCreationMethod={setCreationMethod}
                     setRandomNums={setRandomNums}
                 />} />
