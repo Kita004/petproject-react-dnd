@@ -105,10 +105,12 @@ function App() {
 
     const fetchRaceDetail = async () => {
         try {
-            const resRaceDetail = await api.get(
-                "https://www.dnd5eapi.co/api/races/" + charRace
-            );
-            setRaceDetail(resRaceDetail.data);
+            if (charRace) {
+                const resRaceDetail = await api.get(
+                    "https://www.dnd5eapi.co/api/races/" + charRace
+                );
+                setRaceDetail(resRaceDetail.data);
+            }
         } catch (e) {
             if (e.response) {
                 console.log(e.response.data);
