@@ -2,7 +2,7 @@ import React from "react";
 import api from "../utils/api";
 import {useNavigate} from "react-router-dom";
 
-const CharacterListItem = ({character, setCharacterStates, setUserCharacters }) => {
+const CharacterListItem = ({userCharacters, character, setCharacterStates, setUserCharacters }) => {
     const nav = useNavigate();
 
     const loadCharacter = async (id) => {
@@ -21,9 +21,8 @@ const CharacterListItem = ({character, setCharacterStates, setUserCharacters }) 
 
     const deleteCharacter = async (id) => {
         try {
-            setUserCharacters((current) =>
-                current.filter((char => char.id !==id))
-            )
+            setUserCharacters(userCharacters.filter((char) => char.id != id));
+
             // nav(0);
             await api.delete("/api/characters/" + id)
         } catch (err) {
