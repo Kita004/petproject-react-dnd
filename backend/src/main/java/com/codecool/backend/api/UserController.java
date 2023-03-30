@@ -42,4 +42,18 @@ public class UserController {
     public void deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
     }
+
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user) {
+        try {
+            User userToLogin = userService.getUserByName(user.getName());
+
+            if (!userToLogin.getPassword().equals(user.getPassword())) {
+                return null;
+            }
+            return userToLogin;
+        } catch (Exception err) {
+            return null;
+        }
+    }
 }

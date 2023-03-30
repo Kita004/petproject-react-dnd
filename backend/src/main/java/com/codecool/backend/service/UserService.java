@@ -28,6 +28,10 @@ public class UserService {
         return userRep.getReferenceById(id);
     }
 
+    public User getUserByName(String username) {
+        return userRep.findUserByName(username);
+    }
+
     public User addUser(User user) {
         return userRep.save(user);
     }
