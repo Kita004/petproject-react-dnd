@@ -30,6 +30,7 @@ public class DnDCharacterSheetApplication implements CommandLineRunner {
 		User user1 = new User();
 		user1.setId(1L);
 		user1.setName("TestUser");
+		user1.setPassword("123");
 
 		Stats stats1 = new Stats();
 		stats1.setStrength(8);
