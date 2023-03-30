@@ -29,8 +29,8 @@ public class CharacterController {
     }
 
     @PostMapping
-    public void addCharacter(@RequestBody Character newCharacter) {
-        characterService.createCharacter(newCharacter);
+    public Character addCharacter(@RequestBody Character newCharacter) {
+        return characterService.createCharacter(newCharacter);
     }
 
     @PutMapping("/{id}")
