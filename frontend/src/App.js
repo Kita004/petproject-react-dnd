@@ -266,19 +266,20 @@ function App() {
     };
 
     const buildCharacter = async () => {
-        const newChar = {
-            "name": charName,
-            "level": charLevel,
-            "charClass": charClass,
-            "subClass": charSubClass,
-            "race": charRace,
-            "background": charBackground,
-            "alignment": charAlignment,
-            "stats": {
-                STR, DEX, CON,
-                INT, WIS, CHA
-            }
-        };
+            const newChar = {
+                ...charId === null ? {"id": charId} : null,
+                "name": charName,
+                "level": charLevel,
+                "charClass": charClass,
+                "subClass": charSubClass,
+                "race": charRace,
+                "background": charBackground,
+                "alignment": charAlignment,
+                "stats": {
+                    STR, DEX, CON,
+                    INT, WIS, CHA
+                }
+            };
         return newChar;
     };
 
