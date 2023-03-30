@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import api from "../utils/api";
 import {useNavigate} from "react-router-dom";
-import * as Console from "console";
 
 const Login = ({setUser, setUserCharacters}) => {
     const [username, setUsername] = useState("");
@@ -19,13 +18,13 @@ const Login = ({setUser, setUserCharacters}) => {
             res = await api.post("/api/users/login", user)
 
             if (res.data === null) {
-                Console.log("Van baj");
+               console.log("Van baj");
             } else {
                 setUser(res.data);
                 setUserCharacters(res.data.characters);
 
-                localStorage.setItem('user', JSON.stringify(res.data));
-                // localStorage.setItem('characters', res.data.characters);
+                // localStorage.setItem('user', JSON.stringify(res.data));
+                // localStorage.setItem('characters', JSON.stringify(res.data.characters));
 
                 // TODO ide dob még hogy ha rossz a pw/name
                 nav("/")
