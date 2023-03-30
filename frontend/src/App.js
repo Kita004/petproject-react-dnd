@@ -20,8 +20,8 @@ import {useLocalState} from "./utils/useLocalStorage";
 
 function App() {
     // TODO: create UserContext
-    const [user, setUser] = useState(localStorage.getItem('user'));
-    const [userCharacters, setUserCharacters] = useState(null);
+    const [user, setUser] = useLocalState("", "user");
+    const [userCharacters, setUserCharacters] = useLocalState("", "characters");
 
     // standard, random or point to indicate method and render specific component
     const [creationMethod, setCreationMethod] = useState(null);
