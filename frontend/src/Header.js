@@ -30,6 +30,14 @@ const Header = ({user, setUser, charId, userCharacters, setUserCharacters, build
 
     const updateCharacter = async (id) => {
         const updatedChar = await buildCharacter();
+        const newState = userCharacters.map(char => {
+            if (char.id == id) {
+                return updatedChar
+             } else {
+                return char;
+            }
+        })
+        setUserCharacters(newState);
 
         await api.put("/api/characters/" + id, updatedChar);
     }
