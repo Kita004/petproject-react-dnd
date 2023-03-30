@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import api from "../utils/api";
 import {useNavigate} from "react-router-dom";
+import * as Console from "console";
 
 const Login = ({setUser, setUserCharacters}) => {
     const [username, setUsername] = useState("");
@@ -9,23 +10,29 @@ const Login = ({setUser, setUserCharacters}) => {
 
     const nav = useNavigate();
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let res;
 
-        const user = {username, password};
-        // const res = await api.post("/api/users/auth", user)
-        const res = await api.get("/api/users/" + 1);
+        try {
+            let user = {"name":username,"password": password};
+            res = await api.post("/api/users/login", user)
 
-        if (res.status === 200) {
-            await setUser(res.data);
-            await setUserCharacters(res.data.characters);
+            if (res.data === null) {
+                Console.log("Van baj");
+            } else {
+                setUser(res.data);
+                setUserCharacters(res.data.characters);
 
-            localStorage.setItem('user', res.data);
+                localStorage.setItem('user', JSON.stringify(res.data));
+                // localStorage.setItem('characters', res.data.characters);
 
-            nav("/");
-        } else {
-            setErrorMsg("Oopsie");
+                // TODO ide dob még hogy ha rossz a pw/name
+                nav("/")
+            }
+        } catch (err) {
+            setErrorMsg(err);
+            console.log("ERROR: " + err);
         }
     }
 
