@@ -20,11 +20,13 @@ const Header = ({user, setUser, charId, userCharacters, setUserCharacters, build
     // }
 
     const saveCharacter = async () => {
-        const newChar = await buildCharacter();
+        const res = await api.post("/api/characters", await buildCharacter());
+        const newChar = res.data;
 
         let updatedCharacters = setUserCharacters([...userCharacters, newChar]);
         let updatedUser = {...user, characters: updatedCharacters};
 
+        setUser(updatedUser);
         await api.put("/api/users/" + user.id, updatedUser);
     }
 
@@ -54,11 +56,11 @@ const Header = ({user, setUser, charId, userCharacters, setUserCharacters, build
 
 
     return <header>
-        <button onClick={() => nav("/")}>Home</button>
+        <button onClick={() => {nav("/"); nav(0)}}>Home</button>
         <div className="CRUD">
             {charId ?
                 <button disabled={!user} onClick={() => updateCharacter(charId)}>Save</button> :
-                <button disabled={!user} onClick={() => saveCharacter()}>Save</button>
+                <button disabled={!user} onClick={async () => {await saveCharacter(); nav("/")}}>Save</button>
             }
         </div>
         {user ?
